@@ -1,0 +1,16 @@
+# Because we're not using zero installs, these are the files that should be
+# ignored per https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
+
+# There's actually no library code installed in `node_modules` but various
+# tools uses it as a temporary cache:
+node_modules
+
+# To prevent comitting .old temporary files. This files should only exist in
+# development enviornment.
+*.old
+
+.env

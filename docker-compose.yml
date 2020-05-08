@@ -1,0 +1,66 @@
+version: "2.4"
+services:
+  base:
+    build:
+      args:
+        REPO_MOUNT_POINT: $REPO_MOUNT_POINT
+        REPO_MOUNT_POINT_PARENT: $REPO_MOUNT_POINT_PARENT
+        MAIN_YARN_DIR: $MAIN_YARN_DIR
+      context: .
+
+    # Image name is set explicitly because it's shared by other services:
+    image: $BASE_IMAGE_NAME
+
+    # Because `base` is strictly a utility service that is not part of the
+    # app's run time, its `scale` is set to zero so that it doesn't run when
+    # `docker-compose up` is invoked.
+    scale: 0
+
+  server:
+    command: ["yarn", "workspace", "server", "start"]
+    environment:
+      PORT: $BACK_END_PORT
+    image: $BASE_IMAGE_NAME
+
+    # Ensure proper handling of signals:
+    init: true
+
+    ports:
+      - $BACK_END_HOST_PORT:$BACK_END_PORT
+
+    volumes:
+      # Mount the codebase into the container:
+      - .:$REPO_MOUNT_POINT:delegated
+
+      # Mount Yarn's directory into the container. The `delegated`
+      # configuration is very important because the Yarn directory will have to
+      # handle a large number of file system reads/writes. See
+      # https://docs.docker.com/docker-for-mac/osxfs-caching/#delegated
+      - main_yarn_dir:$MAIN_YARN_DIR:delegated
+
+  client:
+    command: ["yarn", "workspace", "client", "start"]
+    depends_on:
+      # The `client` depends on the `server` because of shared volumes:
+      - server
+    environment:
+      PORT: $FRONT_END_PORT
+      API_URL: http://$BACK_END_HOST_NAME:$BACK_END_HOST_PORT/
+    image: $BASE_IMAGE_NAME
+    init: true
+    ports:
+      - $FRONT_END_HOST_PORT:$FRONT_END_PORT
+    volumes_from:
+      # Note that both the `client` and `server` services share the same
+      # volume mounts. Because the `client` service re-uses the volumes of
+      # the `server` service, if you want to run the `client` service in
+      # isolation (`docker-compose run client`), you'll need to have either
+      # run `docker-compose up` or `docker-compose run server` beforehand in
+      # order to iniatilize the shared volume.
+      - server
+    stdin_open: true
+
+volumes:
+  # Anonymous volume containing Yarn configurations and Yarn-produced
+  # files/directories:
+  main_yarn_dir:
