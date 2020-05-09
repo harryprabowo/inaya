@@ -30,6 +30,7 @@ This project uses:
   - [`react-app-rewired`](https://github.com/timarney/react-app-rewired)
   - [`customize-cra`](https://github.com/arackaf/customize-cra)
 - [`express-generator`](https://github.com/expressjs/generator) generated Express template with Pug viewer and [`nodemon`](https://github.com/remy/nodemon).
+- [PostgreSQL](https://github.com/postgres/postgres/) database with [Sequelize](https://github.com/sequelize/sequelize) ORM.
 
 This project uses `Yarn v2 workspaces`. See [Yarn v2 documentation](https://yarnpkg.com/features/pnp) for details.
 
@@ -75,9 +76,15 @@ To use with Docker, build.
 $ docker-compose build
 ```
 
-Also remember to first **seed & migrate** the database with (the commands in the) `Makefile`.
+### Database
 
-> Mounting `Makefile` to database volume on Docker is `WIP`.
+Remember to **seed & migrate** the database for the first time with (the commands in the) `Makefile`.
+
+```
+$ docker exec <database-container-name> yarn workspace <workspace-name> <script>
+```
+
+> Mounting `Makefile` to database volume on Docker is _`WIP`_.
 
 ## Usage
 

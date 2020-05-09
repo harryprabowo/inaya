@@ -29,7 +29,7 @@ const routes = [
 
   // Public pages
   new Route(undefined, "/404", PageNotFound, null, 0),
-  new Route("Home", "/", Home, null, 0),
+  new Route(undefined, "/", Home, null, 0),
   new Route("About", "/about", About, null, 0),
   new Route("Help", "/help", Help, null, 0),
 
@@ -38,7 +38,7 @@ const routes = [
   new Route("Requests", "/request", Request, faBullhorn, 1, [1, 3]),
   new Route("Facilities", "/facility", Facility, faMapMarkedAlt, 1, [1, 2]),
   new Route("Lines", "/requestlines", RequestLines, faBullhorn, 1, [1, 2]),
-  new Route("Shipments", "/shipment", Shipment, faTruck, 1, [1, 2, 3], 0),
+  new Route("Shipment", "/shipment", Shipment, faTruck, 1, [1, 2, 3], 0),
 ];
 
 export default routes;
