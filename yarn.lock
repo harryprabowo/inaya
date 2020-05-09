@@ -5590,6 +5590,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-spawn@npm:^7.0.1":
+  version: 7.0.2
+  resolution: "cross-spawn@npm:7.0.2"
+  dependencies:
+    path-key: ^3.1.0
+    shebang-command: ^2.0.0
+    which: ^2.0.1
+  checksum: 3/31ad173414e82588537fb00b7c14533c8cfcfbfc87b4eb61c8d12aeb77c89c9afd0f0ef0f5bbe8a5204f888b127c7d8fb42ad22eeab5ac93502aa5f119a09846
+  languageName: node
+  linkType: hard
+
 "cross-var@npm:^1.1.0":
   version: 1.1.0
   resolution: "cross-var@npm:1.1.0"
@@ -6471,14 +6482,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-expand@npm:5.1.0":
+"dotenv-cli@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "dotenv-cli@npm:3.1.0"
+  dependencies:
+    cross-spawn: ^7.0.1
+    dotenv: ^8.1.0
+    dotenv-expand: ^5.1.0
+    minimist: ^1.1.3
+  bin:
+    dotenv: ./cli.js
+  checksum: 3/b831fc9a1daa08403b283e1429ef69a3305c1ae80695e211bb37604d684f017161ba346f6d18ad79328a64865d123a4681268e460fd374eca0529bcbf4316323
+  languageName: node
+  linkType: hard
+
+"dotenv-expand@npm:5.1.0, dotenv-expand@npm:^5.1.0":
   version: 5.1.0
   resolution: "dotenv-expand@npm:5.1.0"
   checksum: 3/b895c6220d345db8f58dca439d3bc65c2ee538659df570ed3fa8c99487df854afd6d1ddadf1e43a4091c9ed6166956e7db7bc5a05cf48fa812c0772e1f5cf860
   languageName: node
   linkType: hard
 
-"dotenv@npm:8.2.0, dotenv@npm:^8.2.0":
+"dotenv@npm:8.2.0, dotenv@npm:^8.1.0, dotenv@npm:^8.2.0":
   version: 8.2.0
   resolution: "dotenv@npm:8.2.0"
   checksum: 3/16cb89cbd7b98b053899b8aba8c5044c8fb61a2db8a81fe70360b75035fce5fed53bd7a34d772be717d0880c0321122a4c09423f518025e1b52d96791521b1a7
@@ -8698,6 +8723,8 @@ fsevents@^1.2.7:
     classnames: ^2.2.6
     concurrently: ^5.2.0
     cross-var: ^1.1.0
+    dotenv: ^8.2.0
+    dotenv-cli: ^3.1.0
     node-sass: ^4.14.1
     pg: ^8.1.0
     prop-types: ^15.7.2
