@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^8.1.0",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "cross-env": "^7.0.2",
     "formik": "^2.1.4",
     "history": "^4.10.1",
     "js-cookie": "^2.2.1",
@@ -40,7 +41,7 @@
     "yup": "^0.28.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "cross-env SASS_PATH=src react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"

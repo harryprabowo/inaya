@@ -72,7 +72,6 @@ services:
     environment:
       PORT: $FRONT_END_PORT
       REACT_APP_API_URL: http://$BACK_END_HOST_NAME:$BACK_END_HOST_PORT
-      SASS_PATH: $SASS_PATH
     image: $BASE_IMAGE_NAME
     init: true
     ports:

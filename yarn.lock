@@ -4190,6 +4190,7 @@ __metadata:
     axios: ^0.19.2
     babel-plugin-root-import: ^6.5.0
     classnames: ^2.2.6
+    cross-env: ^7.0.2
     customize-cra: ^0.9.1
     formik: ^2.1.4
     history: ^4.10.1

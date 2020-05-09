@@ -84,6 +84,7 @@ const App = () => {
             transition: "0.2s",
           }}
         >
+          {process.env.REACT_APP_API_URL}
           © 2020, ITB, Inc. or its affiliates
         </p>
         <br />
