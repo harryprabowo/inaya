@@ -7889,9 +7889,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"inaya@workspace:.":
+"inaya-aid-logistics@workspace:.":
   version: 0.0.0-use.local
-  resolution: "inaya@workspace:."
+  resolution: "inaya-aid-logistics@workspace:."
   dependencies:
     classnames: ^2.2.6
     concurrently: ^5.2.0
