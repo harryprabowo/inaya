@@ -12,19 +12,15 @@ Inaya is a (web) app that allows droppoints and facilites to interact & manage a
 
 Here's a typical use case on Inaya.
 
-1. _Facility_ registers for aid supply inventorism.  
-   Admin then sets shipment dispatch schedules.
-2. Suppliable candidates are submitted for verification.\*  
-   Verified suppliables can be listed in inventory.
-3. _Droppoint_ submits a droppoint for verification.\*  
-   Verified droppoints can request for supplies.
-4. Nearest _facilities_ listing the supplies are committed to the request.  
-   _Droppoint_ can monitor shipment status & details.
+1. _Facility_ registers for aid supply inventorism. Admin then sets shipment dispatch schedules.
+2. Suppliable candidates are submitted for verification.\* Verified suppliables can be listed in inventory.
+3. _Droppoint_ submits a droppoint for verification.\* Verified droppoints can request for supplies.
+4. Nearest _facilities_ listing the supplies are committed to the request. _Droppoint_ can monitor shipment status & details.
 5. Arrived supplies are consigned by _droppoint_.\*
 
 > \*For development purposes, several processes are simulated.
 
-Verification method is `TBD` - current opinion is to have it performed by the superadmin role.
+Verification method is _`TBD`_ - current opinion is to have it performed by the superadmin role.
 
 ## Details
 
@@ -121,9 +117,9 @@ $ docker-compose up --build
 
 Make sure `yarn.lock` is final before building. Difference in `yarn.lock` in the container and the source will cause the build to fail. This is purposely done to conserve cache between host & containers.
 
-### Issues
+## Issues
 
-#### Installation & Usage
+### Installation & Usage
 
 - Make sure package changes are done at project root. Doing it in respective workspaces can fail to cascade. Or simlpy remember to `yarn install` at project root before rebuilding on Docker.
 - Some packages does not work when installed for a workspace only, and has to be installed globally across workspaces (even if it's required only by one workspace). Simply reinstall at the root.
