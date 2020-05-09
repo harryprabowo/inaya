@@ -1,5 +1,7 @@
 # Inaya Aid Logistics
 
+## Overview
+
 Humanitarian aid logistics in Inaya consist of:
 
 - **Droppoint** - hotspot for supply request.
@@ -24,6 +26,19 @@ Here's a typical use case on Inaya.
 
 Verification method is `TBD` - current opinion is to have it performed by the superadmin role.
 
+## Details
+
+This project uses:
+
+- [`create-react-app`](https://github.com/facebook/create-react-app) React template with the following modifications.
+  - [`react-app-rewired`](https://github.com/timarney/react-app-rewired)
+  - [`customize-cra`](https://github.com/arackaf/customize-cra)
+- [`express-generator`](https://github.com/expressjs/generator) generated Express template with Pug viewer and [`nodemon`](https://github.com/remy/nodemon).
+
+This project uses `Yarn v2 workspaces`. See [Yarn v2 documentation](https://yarnpkg.com/features/pnp) for details.
+
+Frontend & backend are separate workspaces with their own `package.json`, located in `/packages/`. This project when locally run will concurrently start the `client` (frontend) and `server` (backend) workspaces. However, each one will be mounted as their own services in Docker.
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -42,14 +57,14 @@ Verification method is `TBD` - current opinion is to have it performed by the su
 1. Clone this project
 
 ```
-git clone https://github.com/harryprabowo/fullstack-cra-boilerplate
+$ git clone https://github.com/harryprabowo/fullstack-cra-boilerplate
 ```
 
 2. Open a terminal at project root and install dependencies.  
    Please note that `docker-compose build` **are set to fail** if this is not done in advance.
 
 ```
-yarn
+$ yarn
 ```
 
 3. Clone `ENV.SAMPLE` and rename to `.env`. Restart any running instances.  
@@ -61,7 +76,7 @@ yarn
 To use with Docker, build.
 
 ```
-docker-compose build
+$ docker-compose build
 ```
 
 Also remember to first **seed & migrate** the database with (the commands in the) `Makefile`.
@@ -73,7 +88,7 @@ Also remember to first **seed & migrate** the database with (the commands in the
 Start the project.
 
 ```
-yarn start
+$ yarn start
 ```
 
 `yarn start` is configured with [`concurrently`](https://github.com/kimmobrunfeldt/concurrently) to run `client` and `server` workspaces - concurrently.
@@ -81,13 +96,13 @@ yarn start
 You can also run each workspaces independently.
 
 ```
-yarn workspace <workspace-name> start
+$ yarn workspace <workspace-name> start
 ```
 
 To run scripts for independent workspaces, use:
 
 ```
-yarn workspace <workspace-name> <script>
+$ yarn workspace <workspace-name> <script>
 ```
 
 ### Docker
@@ -95,13 +110,13 @@ yarn workspace <workspace-name> <script>
 To use with Docker, simply run after building.
 
 ```
-docker-compose up
+$ docker-compose up
 ```
 
 If package is modified, rebuild to apply changes.
 
 ```
-docker-compose up --build
+$ docker-compose up --build
 ```
 
 Make sure `yarn.lock` is final before building. Difference in `yarn.lock` in the container and the source will cause the build to fail. This is purposely done to conserve cache between host & containers.
@@ -114,7 +129,7 @@ Make sure `yarn.lock` is final before building. Difference in `yarn.lock` in the
 - Some packages does not work when installed for a workspace only, and has to be installed globally across workspaces (even if it's required only by one workspace). Simply reinstall at the root.
 
   ```
-  yarn add <package-name>
+  $ yarn add <package-name>
   ```
 
   Do not remove dependency from the local workspace. or else the dependency will be **ambiguous**. Here are the packages in question.
@@ -134,20 +149,20 @@ Make sure `yarn.lock` is final before building. Difference in `yarn.lock` in the
   If package binding error occurs, remove & add packages again.
 
   ```
-  yarn remove <package-name> -A
-  yarn add <package-name>
+  $ yarn remove <package-name> -A
+  $ yarn add <package-name>
   ```
 
   Prepend with `docker exec <package-container>` on Docker.
 
 - If irrecoverable error occured, do the following.
   ```
-  yarn cache clean
-  yarn install
+  $ yarn cache clean
+  $ yarn install
   ```
   And if you're on Docker:
   ```
-  docker-compose up --force-recreate
+  $ docker-compose up --force-recreate
   ```
 
 ## Support
@@ -164,16 +179,10 @@ Version 0.1 (2020-05-09) - Migrating from old codebase at Gitlab, implemented `Y
 
 ## Credits
 
-Team LOGISTIC-1 @ 2020, ITB, Inc. or its affiliates
+Team LOGISTIC-1 @ 2020, ITB, Inc. or its affiliates.
 
 ## License
 
 The MIT License (MIT)
 
 Copyright © 2020 Team LOGISTIC-1
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
