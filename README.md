@@ -171,7 +171,7 @@ Please contribute using [Github Flow](https://guides.github.com/introduction/flo
 
 ## History
 
-Version 0.1 (2020-05-09) - Migrating from old codebase at Gitlab, implemented `Yarn v2 workspaces` [boilerplate](https://github.com/harryprabowo/fullstack-cra-monorepo-boilerplate).
+- Version 0.1 (2020-05-09) - Migrating from old codebase at Gitlab, implemented `Yarn v2 workspaces` [boilerplate](https://github.com/harryprabowo/fullstack-cra-monorepo-boilerplate).
 
 ## Credits
 
