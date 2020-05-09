@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "client": "SASS_PATH=src yarn workspace client start",
+    "client": "SASS_PATH=${SASS_PATH} REACT_APP_API_URL=${REACT_APP_API_URL} yarn workspace client start",
     "server": "yarn workspace server start",
     "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
   },
