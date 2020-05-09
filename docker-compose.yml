@@ -16,14 +16,39 @@ services:
     # `docker-compose up` is invoked.
     scale: 0
 
+  db:
+    container_name: inaya-database
+    image: postgres:12.1
+    restart: on-failure
+    command: -p ${POSTGRES_PORT}
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
   server:
+    container_name: inaya-server
     command: ["yarn", "workspace", "server", "start"]
+    depends_on:
+      - db
     environment:
       PORT: $BACK_END_PORT
+      API_KEY: $API_KEY
+      JWT_SECRET: $JWT_SECRET
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_HOST: $POSTGRES_HOST
+      POSTGRES_PORT: $POSTGRES_PORT
     image: $BASE_IMAGE_NAME
 
     # Ensure proper handling of signals:
     init: true
+    restart: on-failure
 
     ports:
       - $BACK_END_HOST_PORT:$BACK_END_PORT
@@ -39,13 +64,15 @@ services:
       - main_yarn_dir:$MAIN_YARN_DIR:delegated
 
   client:
+    container_name: inaya-client
     command: ["yarn", "workspace", "client", "start"]
     depends_on:
       # The `client` depends on the `server` because of shared volumes:
       - server
     environment:
       PORT: $FRONT_END_PORT
-      API_URL: http://$BACK_END_HOST_NAME:$BACK_END_HOST_PORT/
+      REACT_APP_API_URL: http://$BACK_END_HOST_NAME:$BACK_END_HOST_PORT/
+      SASS_PATH: $SASS_PATH
     image: $BASE_IMAGE_NAME
     init: true
     ports:
@@ -64,3 +91,4 @@ volumes:
   # Anonymous volume containing Yarn configurations and Yarn-produced
   # files/directories:
   main_yarn_dir:
+  postgres:
