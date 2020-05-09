@@ -16,7 +16,7 @@ const Home = (props) => {
           </h6>
           <h1>
             Help shall reach <br />
-            those who needs. {process.env.REACT_APP_API_URL}
+            those who needs.
           </h1>
         </Col>
         <Col></Col>
