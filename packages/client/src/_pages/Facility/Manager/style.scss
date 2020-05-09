@@ -1,0 +1,15 @@
+@import "_assets/variables";
+
+#facility-detail {
+  min-height: calc(#{$content-height} - #{$navbar-height});
+  padding: 1em 2em;
+
+  #detail-container {
+    border-bottom: none;
+
+    span {
+      opacity: 0.7;
+      font-size: 9pt;
+    }
+  }
+}

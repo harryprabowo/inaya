@@ -21,6 +21,8 @@ var requestLineRouter = require('./routes/requestline/requestline');
 
 var app = express();
 
+app.set('view engine', 'pug')
+
 app.use(cors());
 
 app.use(logger("dev"));

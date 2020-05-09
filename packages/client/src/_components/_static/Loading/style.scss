@@ -1,0 +1,73 @@
+@import "_assets/variables";
+
+$loading-icon-size: 80pt;
+
+@keyframes changeColor {
+  0% {
+    color: rgb(180, 0, 0);
+  }
+
+  15% {
+    color: #8400b8;
+  }
+
+  50% {
+    color: #2600ff;
+  }
+
+  80% {
+    color: #0073c0;
+  }
+
+  100% {
+    color: #009aa0;
+  }
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(450deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(450deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(450deg);
+  }
+}
+
+.loading-icon {
+  width: $loading-icon-size !important;
+  height: $loading-icon-size !important;
+  color: white;
+  animation-name: changeColor, spin;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+  animation-direction: alternate;
+
+  position: fixed;
+  top: -5rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+}

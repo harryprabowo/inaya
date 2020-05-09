@@ -1,0 +1,13 @@
+$height: 50vh;
+
+#profile-modal {
+  .wrapper {
+    height: $height;
+    padding: 0;
+  }
+
+  .modal-body {
+    height: $height;
+    padding: 0;
+  }
+}

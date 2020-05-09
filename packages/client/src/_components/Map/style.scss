@@ -1,0 +1,21 @@
+.map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .map-tooltip {
+        img {
+            width: 100%;
+        }
+    }
+
+    .leaflet-container {
+        height: 100%;
+        width: 100%;
+    }
+
+    .leaflet-popup-content {
+        min-width: 8rem;
+        max-width: 12.5rem;
+    }
+}

@@ -5,13 +5,17 @@
     "packages/*"
   ],
   "scripts": {
-    "client": "yarn workspace client start",
+    "client": "SASS_PATH=src yarn workspace client start",
     "server": "yarn workspace server start",
     "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "concurrently": "^5.2.0",
+    "cross-var": "^1.1.0",
+    "node-sass": "^4.14.1",
     "pg": "^8.1.0",
+    "prop-types": "^15.7.2",
     "pug": "^2.0.4"
   }
 }

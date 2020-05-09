@@ -3,7 +3,7 @@ require('dotenv').config();
 var userNormalizer = require('../user/userNormalizer');
 var User = require('../../models').User;
 var Role = require('../../models').Role;
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var response = require('../../helper/response');
 var jwt = require('jsonwebtoken');
 
@@ -52,7 +52,7 @@ exports.register = async (req, res) => {
             RoleId: req.body.role_id
         }
         jwt_token = jwt.sign(user, process.env.JWT_SECRET).toString();
-        return User.create(user).then (
+        return User.create(user).then(
             user => res.status(200).send(response.response(
                 {
                     jwt_token: jwt_token
