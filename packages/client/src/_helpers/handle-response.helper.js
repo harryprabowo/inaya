@@ -10,7 +10,7 @@ const handleResponse = (response, isError = false) => {
     const err = response.response.data.meta;
 
     if (isNullOrUndefined(err)) {
-      return new Error(response.message)
+      return response.message
     }
 
     if ([401].indexOf(err.status) !== -1) {
@@ -18,7 +18,7 @@ const handleResponse = (response, isError = false) => {
       authenticationService.logout();
       window.location.reload(true);
     }
-    return err || new Error(response.statusText);
+    return err || response.statusText;
   }
 
   const res = response.data;
