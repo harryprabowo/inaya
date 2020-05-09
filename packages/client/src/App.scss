@@ -1,0 +1,285 @@
+@import "./_assets/variables";
+@import "./_assets/colors";
+
+// Override default container style
+
+// Custom container style
+#App {
+  min-height: 80vh;
+  background-color: #f2f3f5;
+}
+
+.form-box {
+  margin: 4rem auto;
+}
+
+// Override default component style
+a,
+.btn-link {
+  text-decoration: none !important;
+  transition: 0.2s;
+  padding: 0;
+  border: none;
+  vertical-align: initial !important;
+  color: $color-pallete-main;
+
+  &:hover {
+    color: $color-pallete-main;
+    filter: brightness(1.1);
+  }
+}
+
+.btn-lg {
+  font-size: 12pt;
+
+  .svg-inline--fa {
+    margin: auto 0.25em;
+  }
+}
+
+.row {
+  margin: auto;
+}
+
+.card {
+  border: 1px solid $border-color;
+}
+
+.modal-header button.close span {
+  vertical-align: middle;
+}
+
+.__react_component_tooltip {
+  z-index: 10000;
+}
+
+.rw-popup {
+  box-shadow: none;
+  border: none;
+  background-color: transparent;
+
+  .rw-filter-input {
+    margin: 0;
+
+    .rw-input-reset {
+      height: inherit;
+    }
+
+    .rw-select .rw-btn {
+      margin-top: -5px;
+    }
+  }
+}
+
+.rw-widget {
+  padding: 0;
+
+  .rw-popup-transition {
+    padding: 0;
+  }
+}
+
+.rw-widget-input.rw-widget-picker.rw-widget-container {
+  display: none;
+}
+
+.rw-popup-container {
+  position: unset;
+
+  .rw-list {
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 0 5px 5px 5px;
+    box-shadow: $hard-box-shadow;
+    z-index: 100;
+    transition: 0.1s;
+    overflow: auto;
+
+    .rw-list-option {
+      min-height: 3em;
+      padding-top: .75em;
+      padding-bottom: .75em;
+    }
+  }
+}
+
+.rw-state-focus {
+  .rw-list {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.item-list {
+  padding: 0;
+
+  .row {
+    align-items: center;
+
+    .close-col {
+      padding: 0;
+      transition: 0.1s;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  button {
+    height: 3em;
+    width: 100%;
+    float: right;
+    transition: 0.05s;
+    visibility: hidden;
+    opacity: 0;
+
+    path {
+      color: gray;
+      opacity: 0.8;
+    }
+  }
+
+  &:hover {
+    button {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+// Custom component style
+.wrapper {
+  height: 300px; // OVERRIDE
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.scrollable-children {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.modal-backdrop.layer {
+  z-index: 1050;
+}
+
+.overlay-bg {
+  background-color: black;
+  opacity: 0.8;
+  width: 100%;
+  height: calc(100% - #{$navbar-height});
+  height: 100%;
+
+  position: fixed;
+  // top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 9999;
+
+  &.cover {
+    z-index: 10001;
+  }
+
+  transition: 0.2s;
+}
+
+.alert {
+  position: fixed;
+  z-index: 10100;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: calc(#{$navbar-height} - 2rem);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+
+  &.alert-show {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.5s;
+  }
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.table-card {
+  .card-header {
+    .search-label {
+      margin: 0;
+      padding: 0 1em;
+      width: 100%;
+
+      .form-control {
+        font-size: 13pt;
+        background-color: transparent;
+        border: none;
+
+        &:focus {
+          background-color: white;
+          box-shadow: $hard-box-shadow;
+        }
+      }
+    }
+
+    .btn-lg {
+      &:hover {
+        box-shadow: $hard-box-shadow;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 0;
+
+    .card-filter {
+      padding: 0.5em;
+
+      ul {
+        margin-bottom: 0em;
+      }
+
+      .pagination {
+        float: right;
+
+        a {
+          background-color: #17a2b8;
+          color: white;
+        }
+      }
+    }
+
+    table {
+      padding: 0.5em;
+
+      td {
+        vertical-align: middle;
+      }
+
+      .row-selected {
+        background-color: #f0f0f0;
+      }
+    }
+
+    .pagination-total-container {
+      bottom: 0;
+      text-align: center;
+      margin: 2em auto;
+
+      .react-bootstrap-table-pagination-total {
+        opacity: 0.5;
+      }
+    }
+  }
+}

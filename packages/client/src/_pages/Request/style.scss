@@ -1,0 +1,10 @@
+@import "_assets/variables";
+
+#request {
+  min-height: calc(#{$content-height} - #{$navbar-height});
+  padding: 1em 2em;
+
+  .table-card {
+    min-height: calc(#{$content-height} - #{$navbar-height});
+  }
+}

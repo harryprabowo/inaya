@@ -1,0 +1,27 @@
+table * {
+    font-size: 10pt;
+
+    @media screen and (max-width: 584px) {
+        font-size: 6pt !important;
+    }
+}
+
+#search-bar-0 {
+    @media screen and (max-width: 584px) {
+        margin-bottom: 1em;
+    }
+}
+
+tr.actionable {
+    cursor: pointer;
+}
+
+.table-action {
+    button {
+        margin: 0 .25em;
+
+        svg {
+            opacity: 0.8;
+        }
+    }
+}
