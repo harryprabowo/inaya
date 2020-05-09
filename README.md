@@ -18,7 +18,7 @@ Here's a typical use case on Inaya.
 
 > \*For development purposes, several processes are simulated.
 
-Verification method is `*TBD*` - current opinion is to have it performed by the superadmin role.
+Verification method is _`TBD`_ - current opinion is to have it performed by the superadmin role.
 
 ## Table of Contents
 
