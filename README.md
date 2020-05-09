@@ -102,9 +102,9 @@ docker-compose up --build
 
 Make sure `yarn.lock` is final before building. Difference in `yarn.lock` in the container and the source will cause the build to fail. This is purposely done to conserve cache between host & containers.
 
-### Issues
+## Issues
 
-#### Installation & Usage
+### Installation & Usage
 
 - Make sure package changes are done at project root. Doing it in respective workspaces can fail to cascade. Or simlpy remember to `yarn install` at project root before rebuilding on Docker.
 - Some packages does not work when installed for a workspace only, and has to be installed globally across workspaces (even if it's required only by one workspace). Simply reinstall at the root.
