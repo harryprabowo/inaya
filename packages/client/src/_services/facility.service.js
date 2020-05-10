@@ -95,20 +95,21 @@ const register = async (latitude = throwIfMissing(), longitude = throwIfMissing(
   }
 }
 
-const addItemToWarehouse = async (warehouse_id = throwIfMissing(), item = throwIfMissing()) => {
+const addItemToWarehouse = async (warehouse_id = throwIfMissing(), items = throwIfMissing()) => {
   try {
-    const payload = {
-      warehouse_id,
-      item_id: item.id,
-      quantity: item.quantity
-    }
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/items/warehouse`,
-      payload,
-      authHeader()
-    )
+    let responses = []
 
-    return await handleResponse(res)
+    for (const { item: { id: item_id }, quantity } of items) {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/items/warehouse`,
+        { warehouse_id, item_id, quantity },
+        authHeader()
+      )
+
+      responses.push(await handleResponse(res))
+    }
+
+    return Promise.resolve(responses)
   } catch (err) {
     throw handleResponse(err, true)
   }
@@ -118,52 +119,6 @@ const deleteItemFromWarehouse = async (id = throwIfMissing) => {
   try {
     const response = await axios.delete(
       `${process.env.REACT_APP_API_URL}/items/warehouse?warehouseItem_id=${id}`,
-      authHeader()
-    )
-    return await handleResponse(response)
-  } catch (err) {
-    throw handleResponse(err, true)
-  }
-}
-
-const getSchedules = async (id = throwIfMissing()) => {
-  try {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/warehouse/schedule?warehouse_id=${id}`,
-      authHeader()
-    );
-
-    const schedules = await handleResponse(response);
-
-    return schedules.map(schedule => new Prototype.Schedule(
-      schedule.id,
-      new Prototype.Facility(schedule.WarehouseId),
-      parseInt(schedule.Hour),
-      new Date(schedule.createdAt),
-      new Date(schedule.updatedAt),
-    ))
-  } catch (err) {
-    throw handleResponse(err, true);
-  }
-}
-
-const createSchedule = async (warehouse_id = throwIfMissing(), hour = throwIfMissing()) => {
-  try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/warehouse/schedule`,
-      { warehouse_id, hour },
-      authHeader()
-    )
-    return await handleResponse(response)
-  } catch (err) {
-    throw handleResponse(err, true)
-  }
-}
-
-const deleteSchedule = async (id = throwIfMissing()) => {
-  try {
-    const response = await axios.delete(
-      `${process.env.REACT_APP_API_URL}/warehouse/schedule?schedule_id=${id}`,
       authHeader()
     )
     return await handleResponse(response)
@@ -207,10 +162,6 @@ const facilityService = {
 
   addItemToWarehouse,
   deleteItemFromWarehouse,
-
-  getSchedules,
-  createSchedule,
-  deleteSchedule,
 
   getFacilityByShipment
 }

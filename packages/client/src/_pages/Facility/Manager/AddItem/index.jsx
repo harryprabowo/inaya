@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 
+import { isNullOrUndefined } from "util"
 import {
   urlParamHelper as url
 } from "~/_helpers";
-import { isNullOrUndefined } from "util"
 import { facilityService, itemService } from "~/_services";
 
 import { DropdownList } from 'react-widgets'
@@ -108,32 +108,24 @@ const AddItem = ({ id, ...props }) => {
 
   const handleSubmit = () => {
     if (!isNullOrUndefined(query.get("id"))) {
-      selectedItems.forEach(({ item, quantity }, i) => {
-        facilityService
-          .addItemToWarehouse(
-            query.get("id"),
-            {
-              id: item.id,
-              quantity: quantity
-            }
-          )
-          .then(
-            (res) => {
-              props.setShowModal(false)
-              props.setAlert({
-                message: "Added item(s) successfully",
-                variant: "success"
-              })
-              props.fetchFacilityItems()
-              console.log(i)
-            },
-            (error) => {
-              setSubmitting(false);
-              error.variant = "danger"
-              props.setAlert(error)
-            }
-          )
-      })
+      facilityService.addItemToWarehouse(
+        query.get("id"), selectedItems
+      ).then(
+        (res) => {
+          console.log(res)
+          props.setShowModal(false)
+          props.setAlert({
+            message: "Added item(s) successfully",
+            variant: "success"
+          })
+          props.fetchFacilityItems()
+        },
+        (error) => {
+          setSubmitting(false);
+          error.variant = "danger"
+          props.setAlert(error)
+        }
+      )
     } else {
       props.setAlert(new Error("Wrong parameters"))
     }
