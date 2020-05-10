@@ -189,12 +189,12 @@ const FacilityPage = (props) => {
       <hr style={{ marginBottom: 0 }} />
       <br />
       <Row>
-        <Col>
+        <Col className="left">
           <h5>List of facilities</h5>
           <br />
           <FacilityTable facilityData={facilityData} updateFacilityData={updateFacilityData} {...props} />
         </Col>
-        <Col xs={0} md={6}>
+        <Col xs={0} md={6} className="right">
           <h5>Detail</h5>
           <br />
           <Card className="map-container">

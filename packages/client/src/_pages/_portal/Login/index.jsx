@@ -29,10 +29,10 @@ const Login = (props) => {
   return (
     <Col md={{ offset: 4, span: 4 }} className="form-box">
       <Row>
-        <Col style={{ padding: 0 }}>
+        <Col>
           <h4>Sign in to your dashboard</h4>
         </Col>
-        <Col xs={3} style={{ padding: 0, textAlign: "right", margin: "auto" }}>
+        <Col xs={3} style={{ textAlign: "right", margin: "auto" }}>
           <Link to="/help">Forgot?</Link>
         </Col>
       </Row>

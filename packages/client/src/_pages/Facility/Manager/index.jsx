@@ -17,7 +17,7 @@ import AddItem from "./AddItem"
 import CreateItem from "./CreateItem"
 import ScheduleList from "./Schedules"
 
-import "./style.scss";
+import "./style.scss"
 
 const Manager = (props) => {
   let query = url.useQuery();
@@ -148,13 +148,13 @@ const Manager = (props) => {
   }
 
   return (
-    <div id="facility-detail">
-      <h3>Facility Manager</h3>
+    <div className="pages">
+      <h3>Manage Facility</h3>
       <hr style={{ marginBottom: 0 }} />
       <br />
       <Row>
-        <Col xs={12} md={5}>
-          <h5>Details & Schedule</h5>
+        <Col xs={12} md={5} className="left">
+          <h5>Details</h5>
           <br />
           <Card id="detail-container">
             <Card.Body>
@@ -194,9 +194,14 @@ const Manager = (props) => {
                   )}
             </Card.Body>
           </Card>
-          <ScheduleList {...props} />
+          <hr />
+          <h5>Schedule</h5>
+          <br />
+          <div id="schedule-list" >
+            <ScheduleList {...props} />
+          </div>
         </Col>
-        <Col>
+        <Col className="right">
           <h5>Items List</h5>
           <br />
           <Table

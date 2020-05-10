@@ -66,22 +66,22 @@ const Register = ({ full, ...props }) => {
     >
 
       {({ errors, touched, isSubmitting }) => (
-        <Card border="light">
-          <Card.Header>
-            {full
-              ? <h3>Register New Droppoint</h3>
-              : <span>Enter droppoint details</span>
-            }
-          </Card.Header>
-          <Card.Body>
-            <Row>
-              <Col
-                md={{
-                  offset: full ? 0 : 1,
-                  span: full ? 5 : 10
-                }}
-              >
-                <Form>
+        <Form>
+          <Card border="light">
+            <Card.Header>
+              {full
+                ? <h3>Register New Droppoint</h3>
+                : <span>Enter droppoint details</span>
+              }
+            </Card.Header>
+            <Card.Body>
+              <Row>
+                <Col
+                  md={{
+                    offset: full ? 0 : 1,
+                    span: full ? 5 : 10
+                  }}
+                >
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <Field
@@ -100,7 +100,7 @@ const Register = ({ full, ...props }) => {
                     />
                   </div>
                   <BForm.Row>
-                    <Col style={{ padding: 0 }}>
+                    <Col>
                       <div className="form-group">
                         <label htmlFor="latitude">Latitude</label>
                         <Field
@@ -142,37 +142,28 @@ const Register = ({ full, ...props }) => {
                         />
                       </div>
                     </Col>
-                    {/* <Col style={{ paddingRight: 0 }}>
-                <div className="form-group">
-                <label for="file">File upload</label>
-                <input id="file" name="file" type="file" onChange={(event) => {
-                  setFieldValue("file", event.currentTarget.files[0]);
-                }} className="form-control" />
-                  <Thumb file={values.file} />
-                  </div>
-              </Col> */}
                   </BForm.Row>
-                </Form>
-              </Col>
-            </Row>
-          </Card.Body>
+                </Col>
+              </Row>
+            </Card.Body>
 
-          <Card.Footer style={{ textAlign: 'right' }}>
+            <Card.Footer style={{ textAlign: 'right' }}>
 
-            <Button
-              type="submit"
-              size="lg"
-              variant="info"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <FontAwesomeIcon icon={faSync} spin />
-              ) : (
-                  "Submit"
-                )}
-            </Button>
-          </Card.Footer>
-        </Card>
+              <Button
+                type="submit"
+                size="lg"
+                variant="info"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <FontAwesomeIcon icon={faSync} spin />
+                ) : (
+                    "Submit"
+                  )}
+              </Button>
+            </Card.Footer>
+          </Card>
+        </Form>
       )}
     </Formik>
   );

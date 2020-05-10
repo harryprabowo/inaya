@@ -65,22 +65,22 @@ const Register = ({ full, ...props }) => {
       }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Card border="light">
-          <Card.Header>
-            {full
-              ? <h3>Register New Facility</h3>
-              : <span>Enter facility details</span>
-            }
-          </Card.Header>
-          <Card.Body>
-            <Row>
-              <Col
-                md={{
-                  offset: full ? 0 : 1,
-                  span: full ? 5 : 10
-                }}
-              >
-                <Form>
+        <Form>
+          <Card border="light">
+            <Card.Header>
+              {full
+                ? <h3>Register New Facility</h3>
+                : <span>Enter facility details</span>
+              }
+            </Card.Header>
+            <Card.Body>
+              <Row>
+                <Col
+                  md={{
+                    offset: full ? 0 : 1,
+                    span: full ? 5 : 10
+                  }}
+                >
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <Field
@@ -151,25 +151,25 @@ const Register = ({ full, ...props }) => {
                   </div>
               </Col> */}
                   </BForm.Row>
-                </Form>
-              </Col >
-            </Row>
-          </Card.Body>
-          <Card.Footer style={{ textAlign: 'right' }}>
-            <Button
-              type="submit"
-              size="lg"
-              variant="info"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <FontAwesomeIcon icon={faSync} spin />
-              ) : (
-                  "Submit"
-                )}
-            </Button>
-          </Card.Footer>
-        </Card>
+                </Col >
+              </Row>
+            </Card.Body>
+            <Card.Footer style={{ textAlign: 'right' }}>
+              <Button
+                type="submit"
+                size="lg"
+                variant="info"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <FontAwesomeIcon icon={faSync} spin />
+                ) : (
+                    "Submit"
+                  )}
+              </Button>
+            </Card.Footer>
+          </Card>
+        </Form>
       )}
     </Formik>
   );

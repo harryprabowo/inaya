@@ -81,7 +81,7 @@ const Table = ({
               <>
                 <Card.Header style={{ paddingLeft: 0, paddingRight: 0 }}>
                   <Row>
-                    <Col style={{ padding: 0 }}>
+                    <Col>
                       {searchBar ? (
                         <SearchBar {...props.searchProps} />
                       ) : null}

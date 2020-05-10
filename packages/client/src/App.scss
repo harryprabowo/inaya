@@ -287,4 +287,12 @@ a,
   .map-container {
     min-height: calc(#{$content-height} - #{$navbar-height});
   }
+
+  .left {
+    padding-left: 0
+  }
+
+  .right {
+    padding-right: 0
+  }
 }
