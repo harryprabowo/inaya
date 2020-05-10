@@ -3,10 +3,10 @@
         "baseUrl": ".",
         "paths": {
             "~/*": [
-                "src/*"
+                "packages/client/src/*"
             ],
             "$/*": [
-                "src/assets/*"
+                "packages/client/src/assets/*"
             ]
         }
     }
