@@ -235,17 +235,12 @@ const Facility = (props) => {
             children={
               <Modal show={true} backdrop="static" size="lg" onHide={(e) => back(e)} centered>
                 <Modal.Header closeButton>
-                  <Modal.Title id="contained-modal-title-vcenter">
-                    New Facility
+                  <Modal.Title>
+                    Register New Facility
                   </Modal.Title>
                 </Modal.Header>
-                <Modal.Body
-                  className="wrapper"
-                  style={{ padding: 0, height: "60vh" }}
-                >
-                  <div className="scrollable-children">
-                    <Register {...props} />
-                  </div>
+                <Modal.Body style={{ padding: 0 }}>
+                  <Register {...props} />
                 </Modal.Body>
               </Modal>
             }
