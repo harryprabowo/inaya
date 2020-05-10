@@ -195,7 +195,7 @@ const Create = ({ full, ...props }) => {
                 as="select"
                 className={
                   "form-control" +
-                  (errors.role && touched.role ? " is-invalid" : "")
+                  (errors.droppoint && touched.droppoint ? " is-invalid" : "")
                 }
                 disabled={isSubmitting}
                 onChange={handleChange}
