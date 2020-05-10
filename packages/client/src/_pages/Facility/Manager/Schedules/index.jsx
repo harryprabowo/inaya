@@ -4,7 +4,7 @@ import {
   dateHelper as d,
   urlParamHelper as url
 } from "~/_helpers";
-import { facilityService } from "~/_services";
+import { scheduleService } from "~/_services";
 import { isNullOrUndefined } from "util";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -26,7 +26,7 @@ const ScheduleList = (props) => {
   const fetchSchedules = async (id = query.get("id")) => {
     updateSchedules([])
 
-    facilityService.getSchedules(id)
+    scheduleService.getSchedules(id)
       .then(data => {
         updateSchedules(data)
       })
@@ -89,7 +89,7 @@ const ScheduleList = (props) => {
   ]
 
   const handleDeleteSchedule = () => {
-    facilityService.deleteSchedule(idToDelete)
+    scheduleService.deleteSchedule(idToDelete)
       .then(res => {
         props.setAlert({
           message: "Schedule delete successful",
@@ -156,7 +156,7 @@ const ScheduleList = (props) => {
               },
               { setSubmitting }
             ) => {
-              facilityService
+              scheduleService
                 .createSchedule(
                   query.get("id"), hour
                 )

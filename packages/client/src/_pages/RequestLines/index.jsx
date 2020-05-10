@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { isNullOrUndefined } from "util";
 import {
   dateHelper as d,
   Enum,
 } from "~/_helpers";
-import { isNullOrUndefined } from "util";
-import { requestService, facilityService, itemService } from "~/_services";
+import {
+  requestService,
+  facilityService,
+  itemService
+} from "~/_services";
 
 import { Row, Col, Badge, Button, Modal, Table as BootstrapTable, Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

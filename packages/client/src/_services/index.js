@@ -7,3 +7,4 @@ export { default as shipmentService } from "./shipment.service";
 export { default as droppointService } from "./droppoint.service";
 export { default as facilityService } from "./facility.service";
 export { default as itemService } from "./item.service";
+export { default as scheduleService } from "./schedule.service";

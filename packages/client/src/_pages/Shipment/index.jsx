@@ -51,11 +51,13 @@ const Shipment = (props) => {
           setPoints(
             [
               new Prototype.Marker(
+                shipmentData.droppoint.id,
                 shipmentData.droppoint.position,
                 shipmentData.droppoint.name,
                 <MapTooltip data={shipmentData.droppoint} />
               ),
               new Prototype.Marker(
+                shipmentData.facility.id,
                 shipmentData.facility.position,
                 shipmentData.facility.name,
                 <MapTooltip data={shipmentData.facility} />
