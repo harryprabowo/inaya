@@ -24,8 +24,6 @@ import Map, { MapTooltip } from "~/_components/Map"
 
 import Register from "./Register"
 
-import "./style.scss";
-
 const DroppointTable = ({ droppointData, updateDroppointData, ...props }) => {
   let location = useLocation()
 
@@ -161,7 +159,7 @@ const DroppointPage = (props) => {
   }, [selectedData])
 
   return (
-    <div id="droppoint">
+    <div className="pages">
       <h3>Dashboard</h3>
       <hr style={{ marginBottom: 0 }} />
       <br />

@@ -22,8 +22,6 @@ import { Table } from "~/_components"
 import Detail from "./Detail";
 import Create from "./Create";
 
-import "./style.scss";
-
 const RequestTable = ({ requestData, updateRequestData, ...props }) => {
   let location = useLocation();
   let history = useHistory()
@@ -85,12 +83,14 @@ const RequestTable = ({ requestData, updateRequestData, ...props }) => {
   ]
 
   return (
-    <div id="request">
+    <div className="pages">
+      <h3>Request</h3>
+      <hr style={{ marginBottom: 0 }} />
+      <br />
       <Row>
         <Col md={1} lg={2} />
         <Col>
-          <br />
-          <h3>Your Requests</h3>
+          <h5>Manage</h5>
           <br />
           <Table
             data={requestData}

@@ -10,8 +10,6 @@ import { isNullOrUndefined } from "util"
 
 import Map, { MapTooltip } from "~/_components/Map";
 
-import "./style.scss";
-
 const Shipment = (props) => {
   let query = url.useQuery();
 
@@ -91,9 +89,7 @@ const Shipment = (props) => {
   }, [shipmentData])
 
   return (
-    <div id="shipment">
-      <Map points={points} routes={routes} {...props} />
-    </div>
+    <Map points={points} routes={routes} {...props} />
   );
 };
 

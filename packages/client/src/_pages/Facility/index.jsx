@@ -26,8 +26,6 @@ import Map, { MapTooltip } from "~/_components/Map"
 import Manager from "./Manager";
 import Register from "./Register"
 
-import "./style.scss";
-
 const FacilityTable = ({ facilityData, updateFacilityData, ...props }) => {
   let location = useLocation()
 
@@ -186,7 +184,7 @@ const FacilityPage = (props) => {
   }, [selectedData])
 
   return (
-    <div id="facility">
+    <div className="pages">
       <h3>Dashboard</h3>
       <hr style={{ marginBottom: 0 }} />
       <br />

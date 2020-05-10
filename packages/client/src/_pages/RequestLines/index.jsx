@@ -18,8 +18,6 @@ import { faRoute } from "@fortawesome/free-solid-svg-icons";
 
 import { Table } from "~/_components"
 
-import "./style.scss";
-
 const RequestLines = (props) => {
   const { id } = useParams();
 
@@ -151,12 +149,14 @@ const RequestLines = (props) => {
   }
 
   return (
-    <div id="request-detail">
+    <div className="pages">
+      <h3>Request Lines</h3>
+      <hr style={{ marginBottom: 0 }} />
+      <br />
       <Row>
         <Col md={1} />
         <Col>
-          <br />
-          <h3>Your Request Lines</h3>
+          <h5>Manage</h5>
           <br />
           <Table
             data={requestLines}
