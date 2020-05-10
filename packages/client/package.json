@@ -36,8 +36,8 @@
     "react-tooltip": "^4.2.6",
     "react-widgets": "^4.5.0",
     "rxjs": "^6.5.5",
+    "shortid": "^2.2.15",
     "util": "^0.12.3",
-    "uuid": "^8.0.0",
     "yup": "^0.28.1"
   },
   "scripts": {

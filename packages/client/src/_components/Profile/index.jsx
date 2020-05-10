@@ -34,7 +34,7 @@ const Profile = ({ show, setShow, currentUser, ...props }) => {
       <Modal.Header closeButton>
         <Modal.Title>Profile</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body >
         <Row>
           <Col className="wrapper">
             <div className="scrollable-children" style={{ padding: "2em" }}>

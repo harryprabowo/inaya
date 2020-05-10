@@ -6,13 +6,13 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import { isNullOrUndefined } from "util"
-import { v1 as uuid } from "uuid"
 import {
   dateHelper as d,
   Prototype,
   urlParamHelper as url
 } from "~/_helpers";
+import shortid from "shortid"
+import { isNullOrUndefined } from "util"
 import { droppointService } from "~/_services";
 
 import { Row, Col, Card, Image, Modal } from "react-bootstrap";
@@ -21,6 +21,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { Table } from "~/_components";
 import Map, { MapTooltip } from "~/_components/Map"
+
 import Register from "./Register"
 
 import "./style.scss";
@@ -105,7 +106,7 @@ const DroppointTable = ({ droppointData, updateDroppointData, ...props }) => {
         [
           {
             value: <FontAwesomeIcon icon={faPlus} />,
-            path: `/droppoint/create?id=${uuid()}`,
+            path: `/droppoint/create?f=${shortid.generate()}`,
             tooltip: "Create new drop point",
             history: props.history,
             state: {
@@ -206,17 +207,12 @@ const Droppoint = (props) => {
             children={
               <Modal show={true} size="lg" backdrop="static" onHide={(e) => back(e)} centered>
                 <Modal.Header closeButton>
-                  <Modal.Title id="contained-modal-title-vcenter">
-                    New Facility
+                  <Modal.Title>
+                    Register New Droppoint
                   </Modal.Title>
                 </Modal.Header>
-                <Modal.Body
-                  className="wrapper"
-                  style={{ padding: 0, height: "60vh" }}
-                >
-                  <div className="scrollable-children">
-                    <Register {...props} />
-                  </div>
+                <Modal.Body style={{ padding: 0 }}>
+                  <Register {...props} />
                 </Modal.Body>
               </Modal>
             }

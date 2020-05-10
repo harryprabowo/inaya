@@ -10,7 +10,7 @@ import {
 import {
   dateHelper as d,
 } from "~/_helpers";
-import { v1 as uuid } from "uuid"
+import shortid from "shortid"
 import { isNullOrUndefined } from "util";
 import { requestService } from "~/_services";
 
@@ -110,7 +110,7 @@ const RequestTable = ({ requestData, updateRequestData, ...props }) => {
               [
                 {
                   value: <FontAwesomeIcon icon={faPlus} size="sm" />,
-                  path: `/request/create?draft=${uuid()}`,
+                  path: `/request/create?f=${shortid.generate()}`,
                   tooltip: "Create new request",
                   history,
                   state: {

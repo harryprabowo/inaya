@@ -11,9 +11,9 @@ import {
   Prototype,
   urlParamHelper as url
 } from "~/_helpers";
-import { facilityService } from "~/_services";
+import shortid from "shortid"
 import { isNullOrUndefined } from "util"
-import { v1 as uuid } from "uuid"
+import { facilityService } from "~/_services";
 
 import { Row, Col, Card, Image, Button, Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -130,10 +130,8 @@ const FacilityTable = ({ facilityData, updateFacilityData, ...props }) => {
       headerBtn={
         [
           {
-            value: (
-              <FontAwesomeIcon icon={faPlus} data-tip />
-            ),
-            path: `/facility/create?id=${uuid()}`,
+            value: <FontAwesomeIcon icon={faPlus} data-tip />,
+            path: `/facility/create?f=${shortid.generate()}`,
             tooltip: "Register a facility",
             history: props.history,
             state: {
