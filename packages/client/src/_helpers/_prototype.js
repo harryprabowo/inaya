@@ -62,7 +62,8 @@ export class Route {
 }
 
 export class Marker {
-  constructor(position = throwIfMissing(), tooltip, message) {
+  constructor(id = throwIfMissing(), position = throwIfMissing(), tooltip, message) {
+    this.id = id
     this.position = [throwIfNotType(position.lat, "number"), throwIfNotType(position.long, "number")];
     this.tooltip = tooltip;
     this.message = message;

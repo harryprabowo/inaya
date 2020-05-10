@@ -179,6 +179,7 @@ const FacilityPage = (props) => {
       ? []
       : [
         new Prototype.Marker(
+          selectedData.id,
           selectedData.position,
           selectedData.name,
           <MapTooltip data={selectedData} />
