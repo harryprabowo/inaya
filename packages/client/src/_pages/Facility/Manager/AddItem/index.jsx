@@ -53,7 +53,11 @@ const QuantityModal = ({ showQuantityModal, setShowQuantityModal, handleAddItem 
         <Button variant="secondary" onClick={() => setShowQuantityModal(false)}>
           Cancel
           </Button>
-        <Button variant="info" onClick={() => handleAddItem(quantity)}>
+        <Button variant="info" onClick={() => {
+          handleAddItem(quantity)
+          setQuantity(1)
+        }
+        }>
           Confirm
         </Button>
       </Modal.Footer>
@@ -112,7 +116,6 @@ const AddItem = ({ id, ...props }) => {
         query.get("id"), selectedItems
       ).then(
         (res) => {
-          console.log(res)
           props.setShowModal(false)
           props.setAlert({
             message: "Added item(s) successfully",
