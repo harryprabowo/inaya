@@ -17,6 +17,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
 import { Loading } from "src/_components";
+import { isNullOrUndefined } from "util";
 
 const Register = (props) => {
   const [showLoading, setShowLoading] = useState(false)
