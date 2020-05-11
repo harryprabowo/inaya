@@ -57,7 +57,7 @@ const Login = (props) => {
               const { from } = props.location.state || {
                 from: { pathname: "/" },
               };
-              props.history.replace(from);
+              window.location.replace(from.pathname);
             },
             (error) => {
               setSubmitting(false);

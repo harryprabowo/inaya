@@ -1,5 +1,4 @@
 import { isNullOrUndefined } from "util"
-import { history } from ".";
 import { authenticationService } from "~/_services";
 
 const localStorageRemovables = [
@@ -16,7 +15,7 @@ const logoutHelper = async (showLoading) => {
 
     localStorageRemovables.map(e => localStorage.removeItem(e))
 
-    history.replace("/login");
+    window.location.replace("/login");
   }
 };
 
