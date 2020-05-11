@@ -4,7 +4,7 @@ import { droppointService } from "~/_services";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button, Row, Col, Card, Form as BForm } from "react-bootstrap";
+import { Button, Col, Card, Form as BForm } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
 
@@ -75,9 +75,9 @@ const Register = ({ full, ...props }) => {
               }
             </Card.Header>
             <Card.Body>
-              <Row>
+              <BForm.Row>
                 <Col
-                  md={{
+                  lg={{
                     offset: full ? 0 : 1,
                     span: full ? 5 : 10
                   }}
@@ -144,7 +144,7 @@ const Register = ({ full, ...props }) => {
                     </Col>
                   </BForm.Row>
                 </Col>
-              </Row>
+              </BForm.Row>
             </Card.Body>
 
             <Card.Footer style={{ textAlign: 'right' }}>

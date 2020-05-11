@@ -13,8 +13,6 @@ import { faSpinner, faRoute } from "@fortawesome/free-solid-svg-icons";
 
 import { Table } from "~/_components"
 
-import "./style.scss";
-
 const Detail = ({ full = false, ...props }) => {
   let location = useLocation();
   const { id } = useParams();
@@ -140,17 +138,20 @@ const Detail = ({ full = false, ...props }) => {
   }
 
   return (
-    <div id="request-detail">
+    <div className="pages">
       <Row>
-        {full ? <Col md={1} /> : null}
+        {full ? <Col lg={1} /> : null}
         <Col>
           {full ? (
             <>
+              <h3>Request Details</h3>
+              <hr style={{ marginBottom: 0 }} />
               <br />
-              <h3>Request Detail</h3>
-              <br />
+
             </>
           ) : null}
+          <h5>Overview</h5>
+          <br />
           <Card id="detail-container">
             <Card.Body>
               {isUndefined(requestDetail) ? (
@@ -158,12 +159,12 @@ const Detail = ({ full = false, ...props }) => {
                   <FontAwesomeIcon icon={faSpinner} size="lg" spin />
                 </div>
               ) : isNull(requestDetail) ? null : (
-                <Row>
-                  <Col xs={12} md={6} lg={3}>
+                <Row style={{ alignItems: 'center' }}>
+                  <Col xs={12} md={6} xl={3}>
                     <span>Request ID </span>
                     <h6>{requestDetail.id}</h6>
                   </Col>
-                  <Col xs={12} md={6} lg={3}>
+                  <Col xs={12} md={6} xl={3}>
                     <span>Drop Point </span>
                     <Link to={`/droppoint?id=${requestDetail.droppoint.id}`}>
                       <h6>
@@ -171,11 +172,11 @@ const Detail = ({ full = false, ...props }) => {
                       </h6>
                     </Link>
                   </Col>
-                  <Col xs={12} md={6} lg={3}>
+                  <Col xs={12} md={6} xl={3}>
                     <span>Created On </span>
                     <h6> {d.getShortDate(requestDetail.date)}</h6>
                   </Col>
-                  <Col xs={12} md={6} lg={3}>
+                  <Col xs={12} md={6} xl={3}>
                     <span>Last Updated </span>
                     <h6> {d.getShortDate(requestDetail.lastUpdated)}</h6>
                   </Col>
@@ -183,6 +184,11 @@ const Detail = ({ full = false, ...props }) => {
               )}
             </Card.Body>
           </Card>
+
+          <br />
+
+          <h5>Request Lines</h5>
+          <br />
           <Table
             data={requestLines}
             columns={columns}
@@ -190,7 +196,7 @@ const Detail = ({ full = false, ...props }) => {
             withAction={handleShowItemDetail}
           />
         </Col>
-        {full ? <Col md={1} /> : null}
+        {full ? <Col lg={1} /> : null}
       </Row>
 
       <Modal

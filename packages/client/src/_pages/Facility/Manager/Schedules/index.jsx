@@ -10,7 +10,7 @@ import { isNullOrUndefined } from "util";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SelectList } from "react-widgets"
-import { Modal, Button, Row, Col } from "react-bootstrap";
+import { Modal, Button, Col, Card, Form as BForm } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash, faSync } from "@fortawesome/free-solid-svg-icons";
 
@@ -129,17 +129,16 @@ const ScheduleList = (props) => {
           ]}
       />
       <Modal
-        size="sm"
         show={showModal}
         onHide={() => setShowModal(false)}
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title>
             Create Schedule
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ padding: 0 }}>
           <Formik
             initialValues={{
               name: "",
@@ -182,88 +181,94 @@ const ScheduleList = (props) => {
           >
             {({ errors, touched, isSubmitting }) => (
               <Form>
-                <label>Time</label>
-                <Row>
-                  <Col style={{ marginRight: ".25em", padding: 0 }}>
+                <Card border="light">
+                  <Card.Header>
+                    <span>Enter item details</span>
+                  </Card.Header>
+                  <Card.Body>
+
+                    <label>Time</label>
+                    <BForm.Row>
+                      <Col style={{ marginRight: ".25em", padding: 0 }}>
+                        <div className="form-group">
+                          <Field
+                            name="hour"
+                            type="number"
+                            min={0}
+                            max={23}
+                            step={1}
+                            defaultValue={0}
+                            className={
+                              "form-control" +
+                              (errors.hour && touched.hour ? " is-invalid" : "")
+                            }
+                            disabled={isSubmitting}
+                          />
+                          <ErrorMessage
+                            name="number"
+                            component="div"
+                            className="invalid-feedback"
+                          />
+                        </div>
+                      </Col>
+                      <h3>:</h3>
+                      <Col style={{ marginLeft: ".25em", padding: 0 }}>
+                        <div className="form-group">
+                          <Field
+                            name="minute"
+                            type="number"
+                            min={0}
+                            max={59}
+                            step={1}
+                            defaultValue={0}
+                            className={
+                              "form-control" +
+                              (errors.minute && touched.minute ? " is-invalid" : "")
+                            }
+                            disabled={isSubmitting}
+                          />
+                          <ErrorMessage
+                            name="number"
+                            component="div"
+                            className="invalid-feedback"
+                          />
+                        </div>
+                      </Col>
+                    </BForm.Row>
+
                     <div className="form-group">
-                      <Field
-                        name="hour"
-                        type="number"
-                        min={0}
-                        max={23}
-                        step={1}
-                        defaultValue={0}
-                        className={
-                          "form-control" +
-                          (errors.hour && touched.hour ? " is-invalid" : "")
-                        }
-                        disabled={isSubmitting}
+                      <label htmlFor="day">Day (WIP)</label>
+                      <SelectList
+                        name="day"
+                        data={[
+                          'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+                        ]}
+                        multiple
+                        disabled
                       />
                       <ErrorMessage
-                        name="number"
+                        name="day"
                         component="div"
                         className="invalid-feedback"
                       />
                     </div>
-                  </Col>
+                  </Card.Body>
 
-                  <Col style={{ marginLeft: ".25em", padding: 0 }}>
-                    <div className="form-group">
-                      <Field
-                        name="minute"
-                        type="number"
-                        min={0}
-                        max={59}
-                        step={1}
-                        defaultValue={0}
-                        className={
-                          "form-control" +
-                          (errors.minute && touched.minute ? " is-invalid" : "")
-                        }
-                        disabled={isSubmitting}
-                      />
-                      <ErrorMessage
-                        name="number"
-                        component="div"
-                        className="invalid-feedback"
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <div className="form-group">
-                  <label htmlFor="day">Day (WIP)</label>
-                  <SelectList
-                    name="day"
-                    data={[
-                      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-                    ]}
-                    multiple
-                    disabled
-                  />
-                  <ErrorMessage
-                    name="day"
-                    component="div"
-                    className="invalid-feedback"
-                  />
-                </div>
-
-                <br />
-
-                <div className="form-group" style={{ textAlign: "right" }}>
-                  <Button
-                    type="submit"
-                    size="lg"
-                    variant="info"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <FontAwesomeIcon icon={faSync} spin />
-                    ) : (
-                        "Submit"
-                      )}
-                  </Button>
-                </div>
+                  <Card.Footer style={{ textAlign: 'right' }}>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      variant="info"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <FontAwesomeIcon icon={faSync} spin />
+                      ) : (
+                          "Submit"
+                        )}
+                    </Button>
+                  </Card.Footer>
+                </Card>
               </Form>
             )}
           </Formik>
@@ -277,12 +282,12 @@ const ScheduleList = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title>
             Delete Item
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you positive?
+          Are you sure?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>

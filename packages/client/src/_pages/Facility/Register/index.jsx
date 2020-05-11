@@ -74,9 +74,9 @@ const Register = ({ full, ...props }) => {
               }
             </Card.Header>
             <Card.Body>
-              <Row>
+              <BForm.Row>
                 <Col
-                  md={{
+                  lg={{
                     offset: full ? 0 : 1,
                     span: full ? 5 : 10
                   }}
@@ -141,18 +141,9 @@ const Register = ({ full, ...props }) => {
                         />
                       </div>
                     </Col>
-                    {/* <Col style={{ paddingRight: 0 }}>
-                <div className="form-group">
-                <label for="file">File upload</label>
-                <input id="file" name="file" type="file" onChange={(event) => {
-                  setFieldValue("file", event.currentTarget.files[0]);
-                }} className="form-control" />
-                  <Thumb file={values.file} />
-                  </div>
-              </Col> */}
                   </BForm.Row>
                 </Col >
-              </Row>
+              </BForm.Row>
             </Card.Body>
             <Card.Footer style={{ textAlign: 'right' }}>
               <Button

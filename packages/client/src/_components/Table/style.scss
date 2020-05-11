@@ -1,8 +1,8 @@
 table * {
     font-size: 10pt;
 
-    @media screen and (max-width: 584px) {
-        font-size: 6pt !important;
+    @media screen and (max-width: 480px) {
+        font-size: 8pt;
     }
 }
 

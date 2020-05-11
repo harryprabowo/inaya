@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { isNullOrUndefined } from "util"
-import { logoutHelper, Prototype, dateHelper as d } from "~/_helpers";
+import { Prototype, dateHelper as d } from "~/_helpers";
 
 import notificationService from "~/_services/notification.service";
 
@@ -122,44 +122,40 @@ const MenuBar = ({ currentUser, ...props }) => {
             </NavDropdown>
           ) : null}
 
-          <div
-            style={{ marginLeft: "1em", marginRight: "2em", minWidth: "2em" }}
-          >
-            <Dropdown as={ButtonGroup} alignRight>
-              {currentUser ? (
-                <Button
-                  variant="outline-info"
-                  onClick={() => handleShowProfile()}
-                >
-                  <FontAwesomeIcon icon={faUserCircle} />{" "}
-                  <span>{currentUser.username}</span>
-                </Button>
-              ) : (
-                  <LinkContainer to={{ pathname: "/login", state: { from: props.location } }} style={{ margin: 0 }}>
-                    <Button variant="outline-info">Login</Button>
+          <Dropdown as={ButtonGroup} alignRight>
+            {currentUser ? (
+              <Button
+                variant="outline-info"
+                onClick={() => handleShowProfile()}
+              >
+                <FontAwesomeIcon icon={faUserCircle} />{" "}
+                <span>{currentUser.username}</span>
+              </Button>
+            ) : (
+                <LinkContainer to={{ pathname: "/login", state: { from: props.location } }} style={{ margin: 0 }}>
+                  <Button variant="outline-info">Login</Button>
+                </LinkContainer>
+              )}
+
+            <Dropdown.Toggle split variant="info" className="menu-dropdown" />
+
+            <Dropdown.Menu>
+              {currentUser ? null : (
+                <>
+                  <LinkContainer to="/register" active={false}>
+                    <Dropdown.Item as="button">Register</Dropdown.Item>
                   </LinkContainer>
-                )}
-
-              <Dropdown.Toggle split variant="info" className="menu-dropdown" />
-
-              <Dropdown.Menu>
-                <LinkContainer to="/about" active={false}>
-                  <Dropdown.Item as="button">About</Dropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/help" active={false}>
-                  <Dropdown.Item as="button">Help</Dropdown.Item>
-                </LinkContainer>
-                {currentUser ? (
-                  <>
-                    <Dropdown.Divider />
-                    <Dropdown.Item onClick={() => logoutHelper(setShowLoading)} as="button">
-                      Logout
-                    </Dropdown.Item>
-                  </>
-                ) : null}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+                  <Dropdown.Divider />
+                </>
+              )}
+              <LinkContainer to="/about" active={false}>
+                <Dropdown.Item as="button">About</Dropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/help" active={false}>
+                <Dropdown.Item as="button">Help</Dropdown.Item>
+              </LinkContainer>
+            </Dropdown.Menu>
+          </Dropdown>
         </Nav>
       </Navbar>
 
@@ -168,6 +164,7 @@ const MenuBar = ({ currentUser, ...props }) => {
           component={Profile}
           show={showProfile}
           setShow={handleShowProfile}
+          setShowLoading={setShowLoading}
           currentUser={currentUser}
           {...props}
         />

@@ -174,19 +174,19 @@ const Manager = (props) => {
                           <Image src={facilityDetail.image} fluid rounded style={{ width: '100%', height: '8em', objectFit: 'cover' }} />
                         </Col>
                       )}
-                      <Col xs={12} md={6} lg={3}>
+                      <Col xs={12} md={6} xl={3}>
                         <span>Facility </span>
                         <h6>{facilityDetail.name}</h6>
                       </Col>
-                      <Col xs={12} md={6} lg={3}>
+                      <Col xs={12} md={6} xl={3}>
                         <span>Created </span>
                         <h6> {d.getShortDate(facilityDetail.date)}</h6>
                       </Col>
-                      <Col xs={12} md={6} lg={3}>
+                      <Col xs={12} md={6} xl={3}>
                         <span>Last Updated </span>
                         <h6> {d.getShortDate(facilityDetail.lastUpdated)}</h6>
                       </Col>
-                      <Col xs={12} md={6} lg={3}>
+                      <Col xs={12} md={6} xl={3}>
                         <span>Location</span>
                         <h6><Link to={`/facility?id=${facilityDetail.id}`}>See location</Link></h6>
                       </Col>
@@ -194,9 +194,12 @@ const Manager = (props) => {
                   )}
             </Card.Body>
           </Card>
-          <hr />
+
+          <br />
+
           <h5>Schedule</h5>
           <br />
+
           <div id="schedule-list" >
             <ScheduleList {...props} />
           </div>
@@ -287,17 +290,12 @@ const Manager = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title>
             New item
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body
-          className="wrapper"
-          style={{ padding: 0, height: "60vh" }}
-        >
-          <div className="scrollable-children">
-            <CreateItem setShowModal={setShowRegisterModal} {...props} />
-          </div>
+        <Modal.Body style={{ padding: 0 }}>
+          <CreateItem setShowModal={setShowRegisterModal} {...props} />
         </Modal.Body>
       </Modal>
 
@@ -310,8 +308,8 @@ const Manager = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            New Facility Item
+          <Modal.Title>
+            Add Item
           </Modal.Title>
         </Modal.Header>
         <Modal.Body
@@ -331,12 +329,12 @@ const Manager = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title>
             Delete Item
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you positive?
+          Are you sure?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>

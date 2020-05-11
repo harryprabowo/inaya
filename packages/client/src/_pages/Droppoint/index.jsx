@@ -165,7 +165,7 @@ const DroppointPage = (props) => {
       <br />
       <Row>
         <Col className="left">
-          <h5>List of drop points</h5>
+          <h5>Your Droppoints</h5>
           <br />
           <DroppointTable droppointData={droppointData} updateDroppointData={updateDroppointData} {...props} />
         </Col>

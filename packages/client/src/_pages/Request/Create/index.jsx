@@ -103,32 +103,7 @@ const Create = ({ full, ...props }) => {
   }
 
   return (
-    <Col
-      className={full ? "form-box" : ""}
-      style={{ padding: '2em 0' }}
-      md={{
-        offset: full ? 5 : 1,
-        span: full ? 5 : 10
-      }}
-    >
-      <Row>
-        <Col style={{ padding: 0 }}>
-          {full ? (
-            <>
-              <h3>Create New Request</h3>
-              <span>Enter new request details</span>
-            </>
-          ) : (
-              <h5>Enter request details</h5>
-            )}
-        </Col>
-        <Col
-          xs={3}
-          style={{ padding: 0, textAlign: "right", margin: "auto" }}
-        ></Col>
-      </Row>
-
-      <hr />
+    <>
       <Formik
         initialValues={{
           description: "",
@@ -170,120 +145,135 @@ const Create = ({ full, ...props }) => {
       >
         {({ errors, touched, isSubmitting, handleChange }) => (
           <Form>
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <Field
-                name="description"
-                type="text"
-                className={
-                  "form-control" +
-                  (errors.description && touched.description ? " is-invalid" : "")
+            <Card border="light">
+              <Card.Header>
+                {full
+                  ? <h3>Create New Facility</h3>
+                  : <span>Enter request details</span>
                 }
-                disabled={isSubmitting}
-              />
-              <ErrorMessage
-                name="description"
-                component="div"
-                className="invalid-feedback"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="droppoint">Drop Point</label>
-              <BForm.Control
-                name="droppoint"
-                type="text"
-                as="select"
-                className={
-                  "form-control" +
-                  (errors.droppoint && touched.droppoint ? " is-invalid" : "")
-                }
-                disabled={isSubmitting}
-                onChange={handleChange}
-              >
-                <option value="">---</option>
-                {
-                  isNullOrUndefined(droppoints) || droppoints.length === 0 ? (
-                    <option disabled value="">No droppoints found.</option>
-                  ) : droppoints.map((droppoint, i) => {
-                    return (
-                      <option key={i} value={droppoint.id}>
-                        {droppoint.name || droppoint.id}
-                      </option>
-                    )
-                  })
-                }
-              </BForm.Control>
-              <ErrorMessage
-                name="droppoint"
-                component="div"
-                className="invalid-feedback"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="items">Items</label>
-              <Card>
-                <Card.Header>
-                  <DropdownList open={true} onToggle={() => { }} filter value={value} data={items} textField="name" onChange={handleSelect} />
-                  <ErrorMessage
-                    name="items"
-                    component="div"
-                    className="invalid-feedback"
-                  />
-                </Card.Header>
-                {
-                  isNullOrUndefined(selectedItems) || selectedItems.length === 0
-                    ? (
-                      <Card.Body style={{ textAlign: 'center' }}>
-                        No items selected
-                      </Card.Body>
-                    ) : (
-                      <ListGroup variant="flush">
+              </Card.Header>
+              <Card.Body>
+                <BForm.Row>
+                  <Col
+                    lg={{
+                      offset: full ? 0 : 1,
+                      span: full ? 5 : 10
+                    }}
+                  >
+                    <div className="form-group">
+                      <label htmlFor="description">Description</label>
+                      <Field
+                        name="description"
+                        type="text"
+                        className={
+                          "form-control" +
+                          (errors.description && touched.description ? " is-invalid" : "")
+                        }
+                        disabled={isSubmitting}
+                      />
+                      <ErrorMessage
+                        name="description"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="droppoint">Drop Point</label>
+                      <BForm.Control
+                        name="droppoint"
+                        type="text"
+                        as="select"
+                        className={
+                          "form-control" +
+                          (errors.droppoint && touched.droppoint ? " is-invalid" : "")
+                        }
+                        disabled={isSubmitting}
+                        onChange={handleChange}
+                      >
+                        <option value="">---</option>
                         {
-                          selectedItems.map(({ item, quantity }, i) => (
-                            <ListGroupItem key={i} className="item-list">
-                              <Row>
-                                <Col>
-                                  {item.name}
-                                </Col>
-                                <Col style={{ paddingRight: '1em', textAlign: 'right' }}>
-                                  <strong>{quantity}</strong>
-                                </Col>
-                                <Col xs={1} className="close-col">
-                                  <Button variant="link" onClick={() => handleDeleteItem(i)}>
-                                    <FontAwesomeIcon icon={faTimes} />
-                                  </Button>
-                                </Col>
-                              </Row>
-                            </ListGroupItem>
-                          ))}
-                      </ListGroup>
-                    )
-                }
-              </Card>
-            </div>
-
-            <hr />
-
-            <div className="form-group" style={{ textAlign: "right" }}>
-              <Button
-                type="submit"
-                size="lg"
-                variant="info"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <FontAwesomeIcon icon={faSync} spin />
-                ) : (
-                    "Submit"
-                  )}
-              </Button>
-            </div>
+                          isNullOrUndefined(droppoints) || droppoints.length === 0 ? (
+                            <option disabled value="">No droppoints found.</option>
+                          ) : droppoints.map((droppoint, i) => {
+                            return (
+                              <option key={i} value={droppoint.id}>
+                                {droppoint.name || droppoint.id}
+                              </option>
+                            )
+                          })
+                        }
+                      </BForm.Control>
+                      <ErrorMessage
+                        name="droppoint"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="items">Items</label>
+                      <Card>
+                        <Card.Header>
+                          <DropdownList open={true} onToggle={() => { }} filter value={value} data={items} textField="name" onChange={handleSelect} />
+                          <ErrorMessage
+                            name="items"
+                            component="div"
+                            className="invalid-feedback"
+                          />
+                        </Card.Header>
+                        {
+                          isNullOrUndefined(selectedItems) || selectedItems.length === 0
+                            ? (
+                              <Card.Body style={{ textAlign: 'center' }}>
+                                No items selected
+                              </Card.Body>
+                            ) : (
+                              <ListGroup variant="flush">
+                                {
+                                  selectedItems.map(({ item, quantity }, i) => (
+                                    <ListGroupItem key={i} className="item-list">
+                                      <Row>
+                                        <Col>
+                                          {item.name}
+                                        </Col>
+                                        <Col style={{ paddingRight: '1em', textAlign: 'right' }}>
+                                          <strong>{quantity}</strong>
+                                        </Col>
+                                        <Col xs={1} className="close-col">
+                                          <Button variant="link" onClick={() => handleDeleteItem(i)}>
+                                            <FontAwesomeIcon icon={faTimes} />
+                                          </Button>
+                                        </Col>
+                                      </Row>
+                                    </ListGroupItem>
+                                  ))}
+                              </ListGroup>
+                            )
+                        }
+                      </Card>
+                    </div>
+                  </Col>
+                </BForm.Row>
+              </Card.Body>
+              <Card.Footer style={{ textAlign: 'right' }}>
+                <Button
+                  type="submit"
+                  size="lg"
+                  variant="info"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <FontAwesomeIcon icon={faSync} spin />
+                  ) : (
+                      "Submit"
+                    )}
+                </Button>
+              </Card.Footer>
+            </Card>
           </Form>
         )}
       </Formik>
-      <br />
       <QuantityModal showQuantityModal={showQuantityModal} setShowQuantityModal={setShowQuantityModal} handleAddItem={handleAddItem} />
-    </Col >
+    </>
   );
 };
 

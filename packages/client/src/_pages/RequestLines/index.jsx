@@ -154,7 +154,7 @@ const RequestLines = (props) => {
       <hr style={{ marginBottom: 0 }} />
       <br />
       <Row>
-        <Col md={1} />
+        <Col lg={1} />
         <Col>
           <h5>Manage</h5>
           <br />
@@ -221,7 +221,7 @@ const RequestLines = (props) => {
             </Modal.Body>
           </Modal>
         </Col>
-        <Col md={1} />
+        <Col lg={1} />
       </Row>
     </div>
   );

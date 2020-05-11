@@ -288,6 +288,28 @@ a,
     min-height: calc(#{$content-height} - #{$navbar-height});
   }
 
+  @media screen and (max-width: 1024px) {
+    padding: 1rem;
+
+    .left,
+    .right {
+      padding: 0 .5rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+
+    .col,
+    .left,
+    .right {
+      padding: 0
+    }
+
+    .left {
+      margin-bottom: 1.5rem;
+    }
+  }
+
   .left {
     padding-left: 0
   }

@@ -136,84 +136,75 @@ const AddItem = ({ id, ...props }) => {
 
 
   return (
-    <div
-      style={{ padding: '2em 4em' }}
-    >
-      <Row>
-        <Col style={{ padding: 0 }}>
-          <h5>Enter item details</h5>
-        </Col>
-      </Row>
-
-      <hr />
+    <>
       <Form>
-        <div className="form-group">
-          <label htmlFor="items">Items</label>
-          <Card>
-            <Card.Header>
-              <DropdownList
-                filter
-                open={true}
-                onToggle={() => { }}
-                value={value}
-                data={items}
-                textField="name"
-                onChange={handleSelect}
-                disabled={isSubmitting}
-              />
-            </Card.Header>
-            {
-              isNullOrUndefined(selectedItems) || selectedItems.length === 0
-                ? (
-                  <Card.Body style={{ textAlign: 'center' }}>
-                    No items selected
-                  </Card.Body>
-                ) : (
-                  <ListGroup variant="flush">
-                    {
-                      selectedItems.map(({ item, quantity }, i) => (
-                        <ListGroupItem key={i} className="item-list">
-                          <Row>
-                            <Col>
-                              {item.name}
-                            </Col>
-                            <Col style={{ paddingRight: '1em', textAlign: 'right' }}>
-                              <strong>{quantity}</strong>
-                            </Col>
-                            <Col xs={1} className="close-col">
-                              <Button variant="link" onClick={() => handleDeleteItem(i)}>
-                                <FontAwesomeIcon icon={faTimes} />
-                              </Button>
-                            </Col>
-                          </Row>
-                        </ListGroupItem>
-                      ))}
-                  </ListGroup>
-                )
-            }
-          </Card>
-        </div>
+        <Card border="light">
+          <Card.Header style={{ textAlign: 'right' }}>
+            <Button
+              variant="info"
+              disabled={isSubmitting}
+              onClick={handleSubmit}
+            >
+              {isSubmitting ? (
+                <FontAwesomeIcon icon={faSync} spin />
+              ) : (
+                  "Submit"
+                )}
+            </Button>
 
-        <br />
-
-        <div className="form-group" style={{ textAlign: "right" }}>
-          <Button
-            size="lg"
-            variant="info"
-            disabled={isSubmitting}
-            onClick={handleSubmit}
-          >
-            {isSubmitting ? (
-              <FontAwesomeIcon icon={faSync} spin />
-            ) : (
-                "Submit"
-              )}
-          </Button>
-        </div>
+          </Card.Header>
+          <Card.Body>
+            <div className="form-group">
+              <label htmlFor="items">Items</label>
+              <Card>
+                <Card.Header>
+                  <DropdownList
+                    filter
+                    open={true}
+                    onToggle={() => { }}
+                    value={value}
+                    data={items}
+                    textField="name"
+                    onChange={handleSelect}
+                    disabled={isSubmitting}
+                  />
+                </Card.Header>
+                {
+                  isNullOrUndefined(selectedItems) || selectedItems.length === 0
+                    ? (
+                      <Card.Body style={{ textAlign: 'center' }}>
+                        No items selected
+                      </Card.Body>
+                    ) : (
+                      <ListGroup variant="flush">
+                        {
+                          selectedItems.map(({ item, quantity }, i) => (
+                            <ListGroupItem key={i} className="item-list">
+                              <Row>
+                                <Col>
+                                  {item.name}
+                                </Col>
+                                <Col style={{ paddingRight: '1em', textAlign: 'right' }}>
+                                  <strong>{quantity}</strong>
+                                </Col>
+                                <Col xs={1} className="close-col">
+                                  <Button variant="link" onClick={() => handleDeleteItem(i)}>
+                                    <FontAwesomeIcon icon={faTimes} />
+                                  </Button>
+                                </Col>
+                              </Row>
+                            </ListGroupItem>
+                          ))}
+                      </ListGroup>
+                    )
+                }
+              </Card>
+            </div>
+          </Card.Body>
+        </Card>
       </Form>
-      <br />
       <QuantityModal showQuantityModal={showQuantityModal} setShowQuantityModal={setShowQuantityModal} handleAddItem={handleAddItem} />
-    </div >
+    </>
   );
 }
 
