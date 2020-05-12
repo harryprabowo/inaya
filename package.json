@@ -7,8 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "client": "cross-env REACT_APP_API_URL=http://localhost:4000 yarn workspace client start",
-    "server": "yarn workspace server start",
+    "client": "cross-env REACT_APP_API_URL=http://localhost:4000 yarn workspace client dev",
+    "server": "yarn workspace server dev",
     "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
   },
   "dependencies": {
