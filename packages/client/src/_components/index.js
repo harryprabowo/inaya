@@ -1,6 +1,6 @@
-export { default as PrivateComponent } from "./_private/PrivateComponent";
-export { default as PrivateRoute } from "./_private/PrivateRoute";
-export { default as PublicRoute } from "./_private/PublicRoute";
+export { default as PrivateComponent } from "./PrivateComponent";
+export { default as PrivateRoute } from "./PrivateRoute";
+export { default as PublicRoute } from "./PublicRoute";
 
 export { default as Alert } from "./_static/Alert";
 export { default as Loading } from "./_static/Loading";

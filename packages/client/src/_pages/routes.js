@@ -28,10 +28,10 @@ const routes = [
   new Route("Login", "/login", Login, undefined, 0),
 
   // Public pages
-  new Route(undefined, "/404", PageNotFound, undefined, 0),
+  new Route(undefined, "/404", PageNotFound),
   new Route(undefined, "/", Home, undefined, 0),
-  new Route("About", "/about", About, undefined, 0),
-  new Route("Help", "/help", Help, undefined, 0),
+  new Route("About", "/about", About),
+  new Route("Help", "/help", Help),
 
   // Private pages
   new Route("Droppoints", "/droppoint", Droppoint, faMapMarkedAlt, 1, [1, 3]),

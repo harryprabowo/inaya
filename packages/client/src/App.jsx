@@ -61,6 +61,8 @@ const App = () => {
                     <PublicRoute
                       name={route.name}
                       component={route.component}
+                      restrict={route.isPrivate === 0}
+                      currentUser={currentUser}
                       {...props}
                       setAlert={setAlert}
                     />

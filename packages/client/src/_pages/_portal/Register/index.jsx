@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { authenticationService } from "~/_services";
@@ -21,14 +21,6 @@ import { isNullOrUndefined } from "util";
 
 const Register = (props) => {
   const [showLoading, setShowLoading] = useState(false)
-
-  useEffect(() => {
-    // redirect to home if already logged in
-    if (authenticationService.currentUserValue) {
-      props.history.push("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const equalTo = (ref, msg) => {
     return Yup.mixed().test({
