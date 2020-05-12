@@ -1,22 +1,14 @@
-import axios from "axios"
-import { authHeader, handleResponse } from "~/_helpers";
+import { config } from "~/_helpers";
+
+const { api } = config
 
 const fetchNotification = async () => {
-  try {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/notification`,
-      authHeader()
-    );
+  const response = await api(true).get(`/notification`);
 
-    const data = await handleResponse(response);
-
-    return data.map(({ createdAt, updatedAt, ...d }) => ({
-      ...d,
-      time: new Date(updatedAt)
-    }))
-  } catch (err) {
-    handleResponse(err, true);
-  }
+  return response.map(({ createdAt, updatedAt, ...d }) => ({
+    ...d,
+    time: new Date(updatedAt)
+  }))
 };
 
 const notificationService = {

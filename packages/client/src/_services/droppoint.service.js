@@ -1,88 +1,72 @@
-import axios from "axios"
 import Cookie from "js-cookie"
 import { isNullOrUndefined } from "util"
-import { authHeader, handleResponse, Prototype, argsValidator } from "~/_helpers";
+import {
+  argsValidator,
+  config,
+  Prototype,
+} from "~/_helpers";
 
+const { api } = config
 const { throwIfMissing } = argsValidator
 
 const fetchMyDroppoints = async () => {
-    try {
-        const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/droppoint/user`,
-            authHeader()
-        );
+  const response = await api(true).get(`/droppoint/user`);
 
-        const droppoints = await handleResponse(response);
+  const droppoints = response;
 
-        return droppoints.map(droppoint => new Prototype.Droppoint(
-            droppoint.id,
-            `Point #${droppoint.id}`, // TODO: Implement name
-            new Prototype.Position(
-                parseFloat(droppoint.longitude),
-                parseFloat(droppoint.latitude)
-            ),
-            new Date(droppoint.createdAt),
-            new Date(droppoint.updatedAt),
-            // isNullOrUndefined(droppoint.image)
-            //     ? "https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/topic/image/GettyImages-1125121546_0.jpg?itok=VInTwcQ5"
-            //     : droppoint.image  // TODO: Implement image
-        ))
-
-    } catch (err) {
-        throw handleResponse(err, true);
-    }
+  return droppoints.map(droppoint => new Prototype.Droppoint(
+    droppoint.id,
+    `Point #${droppoint.id}`, // TODO: Implement name
+    new Prototype.Position(
+      parseFloat(droppoint.longitude),
+      parseFloat(droppoint.latitude)
+    ),
+    new Date(droppoint.createdAt),
+    new Date(droppoint.updatedAt),
+    // isNullOrUndefined(droppoint.image)
+    //     ? "https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/topic/image/GettyImages-1125121546_0.jpg?itok=VInTwcQ5"
+    //     : droppoint.image  // TODO: Implement image
+  ))
 }
 
 const register = async (latitude = throwIfMissing(), longitude = throwIfMissing()) => {
-    try {
-        const userId = JSON.parse(Cookie.get("user"))["id"]
+  const userId = JSON.parse(Cookie.get("user"))["id"] //FIXME: Please dont ask userId from client
+  if (isNullOrUndefined(userId)) return Promise.reject("User ID not available")
 
-        if (isNullOrUndefined(userId)) throw new Error("User ID not available")
-
-        const response = await axios.post(
-            `${process.env.REACT_APP_API_URL}/droppoint/create`,
-            { userId, longitude, latitude },
-            authHeader()
-        )
-
-        return await handleResponse(response)
-    } catch (err) {
-        throw handleResponse(err, true)
-    }
+  return await api(true).post(
+    `/droppoint/create`,
+    {
+      userId,
+      longitude,
+      latitude
+    },
+  )
 }
 
 const getDroppointByShipment = async (id = throwIfMissing()) => {
-    try {
-        const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/droppoint?delivery_id=${id}`,
-            authHeader()
-        );
+  const response = await api(true).get(`/droppoint?delivery_id=${id}`);
 
-        const { droppoints } = await handleResponse(response);
-        const droppoint = droppoints[0]
+  const droppoint = response.droppoints[0];
 
-        return new Prototype.Droppoint(
-            droppoint.id,
-            `Point #${droppoint.id}`, // TODO: Implement name
-            new Prototype.Position(
-                parseFloat(droppoint.longitude),
-                parseFloat(droppoint.latitude)
-            ),
-            new Date(droppoint.createdAt),
-            new Date(droppoint.updatedAt),
-            // isNullOrUndefined(droppoint.image)
-            //     ? "https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/topic/image/GettyImages-1125121546_0.jpg?itok=VInTwcQ5"
-            //     : droppoint.image  // TODO: Implement image
-        )
-    } catch (err) {
-        throw handleResponse(err, true);
-    }
+  return new Prototype.Droppoint(
+    droppoint.id,
+    `Point #${droppoint.id}`, // TODO: Implement name
+    new Prototype.Position(
+      parseFloat(droppoint.longitude),
+      parseFloat(droppoint.latitude)
+    ),
+    new Date(droppoint.createdAt),
+    new Date(droppoint.updatedAt),
+    // isNullOrUndefined(droppoint.image)
+    //     ? "https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/topic/image/GettyImages-1125121546_0.jpg?itok=VInTwcQ5"
+    //     : droppoint.image  // TODO: Implement image
+  )
 }
 
 const droppointService = {
-    fetchMyDroppoints,
-    register,
-    getDroppointByShipment
+  fetchMyDroppoints,
+  register,
+  getDroppointByShipment
 }
 
 export default droppointService

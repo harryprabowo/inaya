@@ -1,8 +1,9 @@
-import axios from "axios";
 import Cookies from 'js-cookie';
 import { BehaviorSubject } from "rxjs";
-import { handleResponse } from "~/_helpers";
-import { isNullOrUndefined } from "util";
+import { config } from "~/_helpers";
+import { isNullOrUndefined } from 'util';
+
+const { api } = config
 
 const currentUserSubject = new BehaviorSubject(
   Cookies.get("token")
@@ -20,52 +21,44 @@ const register = async (
   password,
   role_id
 ) => {
-  try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/user/register`,
-      {
-        email,
-        username,
-        password,
-        role_id,
-      }
-    );
+  const response = await api().post(
+    `/user/register`,
+    {
+      email,
+      username,
+      password,
+      role_id,
+    }
+  );
 
-    const { jwt_token } = await handleResponse(response)
+  // store user details and jwt token in local storage to keep user logged in between page refreshes
+  Cookies.set("token", response.jwt_token, {
+    expires: 1,
+    sameSite: 'strict'
+    // secure: true, // TODO: MAKE HTTPS
+  })
 
-    // store user details and jwt token in local storage to keep user logged in between page refreshes
-    Cookies.set("token", jwt_token, {
-      expires: 1,
-      sameSite: 'strict'
-      // secure: true, // TODO: MAKE HTTPS
-    })
-
-    return validate();
-  } catch (err) {
-    throw handleResponse(err, true);
-  }
+  return validate();
 };
 
 const login = async (username, password) => {
-  try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/user/login`,
-      { username, password }
-    );
+  const response = await api().post(
+    `/user/login`,
+    {
+      username,
+      password
+    }
+  );
 
-    const { jwt_token } = await handleResponse(response);
 
-    // store user details and jwt token in local storage to keep user logged in between page refreshes
-    Cookies.set("token", jwt_token, {
-      expires: 1,
-      sameSite: 'strict'
-      // secure: true, // TODO: MAKE HTTPS
-    })
+  // store user details and jwt token in local storage to keep user logged in between page refreshes
+  Cookies.set("token", response.jwt_token, {
+    expires: 1,
+    sameSite: 'strict',
+    // secure: true, // TODO: MAKE HTTPS
+  })
 
-    return validate();
-  } catch (err) {
-    throw handleResponse(err, true);
-  }
+  return validate();
 };
 
 const logout = () => {
@@ -79,29 +72,16 @@ const logout = () => {
 };
 
 const validate = async () => {
-  try {
-    const config = {
-      headers: { Authorization: `Bearer ${Cookies.get("token")}` },
-    };
+  const response = await api(true).get(`/user/validate`);
 
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/user/validate`,
-      config
-    );
+  Cookies.set("user", response, {
+    sameSite: 'strict'
+    // secure: true, // TODO: MAKE HTTPS
+  })
 
-    const data = await handleResponse(response);
+  currentUserSubject.next(response);
 
-    Cookies.set("user", data, {
-      sameSite: 'strict'
-      // secure: true, // TODO: MAKE HTTPS
-    })
-
-    currentUserSubject.next(data);
-
-    return Promise.resolve(currentUserSubject.value);
-  } catch (err) {
-    throw handleResponse(err, true)
-  }
+  return Promise.resolve(currentUserSubject.value);
 };
 
 const authenticationService = {
@@ -110,8 +90,9 @@ const authenticationService = {
   logout,
   currentUser: currentUserSubject.asObservable(),
   get currentUserValue() {
-    if (isNullOrUndefined(currentUserSubject.value)) return currentUserSubject.value;
-    return validate();
+    return isNullOrUndefined(currentUserSubject.value)
+      ? currentUserSubject.value
+      : validate();
   },
 };
 
