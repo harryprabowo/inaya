@@ -43,6 +43,7 @@ const App = () => {
             <Route
               key={i}
               exact={route.path === "/"}
+              strict={route.path === "/"}
               path={route.path}
               render={props => {
                 if (route.isPrivate) {
