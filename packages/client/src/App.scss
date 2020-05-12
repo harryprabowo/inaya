@@ -312,6 +312,12 @@ a,
     .left {
       margin-bottom: 1.5rem;
     }
+
+    .row {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
   }
 
   .left {

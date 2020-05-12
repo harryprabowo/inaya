@@ -88,7 +88,6 @@ const App = () => {
             textAlign: "center",
             fontSize: "9pt",
             color: "grey",
-            transition: "0.2s",
           }}
         >
           @ 2020, ITB, Inc. or its affiliates

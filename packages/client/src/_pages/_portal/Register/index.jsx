@@ -109,11 +109,10 @@ const Register = (props) => {
               (res) => {
                 setShowLoading(true)
 
-                const { from } = isNullOrUndefined(props.location.state)
-                  ? { from: { pathname: "/" } }
-                  : props.location.state || { from: { pathname: "/" } }
+                const state = isNullOrUndefined(props.location) ? undefined : props.location.state
+                const from = isNullOrUndefined(state) ? undefined : props.location.state.from
 
-                window.location.replace(from.pathname);
+                window.location.replace(isNullOrUndefined(from) ? "/" : from.pathname || "/");
               },
               (error) => {
                 setSubmitting(false)
@@ -125,7 +124,7 @@ const Register = (props) => {
       >
         {({ errors, touched, isSubmitting, handleChange }) => (
           <Form>
-            <BForm.Row style={{ margin: '10vh auto' }}>
+            <BForm.Row style={{ margin: '5vh auto', padding: '0 1em' }}>
               <Col sm={2} lg={3} xl={4} />
               <Col>
                 <BForm.Row>
