@@ -1,9 +1,7 @@
 export { default as argsValidator } from "./args-validator.helper";
-export { default as authHeader } from "./auth-header.helper";
 export { default as config } from "./_config";
 export { default as dateHelper } from "./date.helper";
 export { default as Enum } from "./_enum";
-export { default as handleResponse } from "./handle-response.helper";
 export { default as history } from "./history.helper";
 export { default as logoutHelper } from "./logout.helper";
 export { default as Prototype } from "./_prototype";
