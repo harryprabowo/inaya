@@ -15,8 +15,7 @@ const fetchNotification = async () => {
       time: new Date(updatedAt)
     }))
   } catch (err) {
-    const error = handleResponse(err, true);
-    throw error;
+    handleResponse(err, true);
   }
 };
 

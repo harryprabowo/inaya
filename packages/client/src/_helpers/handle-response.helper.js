@@ -3,22 +3,23 @@ import { authenticationService } from "~/_services";
 
 const handleResponse = (response, isError = false) => {
   if (isError) {
-    if (isNullOrUndefined(response.response)) {
+    const error = response.response
+
+    if (isNullOrUndefined(error)) {
       return response;
     }
 
-    const err = response.response.data.meta;
+    const { status, statusText } = error
 
-    if (isNullOrUndefined(err)) {
-      return response.message
-    }
+    const err = error.data.meta || { status, statusText };
 
-    if ([401].indexOf(err.status) !== -1) {
+    if ([401, 498, 499, 501].indexOf(err.status) !== -1) {
       // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
       authenticationService.logout();
       window.location.reload(true);
     }
-    return err || response.statusText;
+
+    return err;
   }
 
   const res = response.data;

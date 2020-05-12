@@ -45,17 +45,23 @@ const MenuBar = ({ currentUser, ...props }) => {
     );
   });
 
+  const { setAlert } = props
+
   useEffect(() => {
-    let interval
+    let interval;
 
     if (!isNullOrUndefined(currentUser)) {
       interval = setInterval(() => {
-        notificationService.fetchNotification()
-          .then(res => updateNotifications(res))
+        try {
+          notificationService.fetchNotification()
+            .then(res => updateNotifications(res || []))
+        } catch (err) {
+          setAlert(err)
+        }
       }, 10000);
     }
     return () => clearInterval(interval);
-  }, [currentUser]);
+  }, [currentUser, setAlert]);
 
   return (
     <>

@@ -5,6 +5,7 @@
 
 // Custom container style
 #App {
+  min-height: 85vh;
   background-color: rgba(0, 0, 0, .03);
 }
 
@@ -293,13 +294,16 @@ a,
 
     .left,
     .right {
-      padding: 0 .5rem;
+      padding: 0 1rem;
+    }
+
+    .col {
+      padding: 0;
     }
   }
 
   @media screen and (max-width: 768px) {
 
-    .col,
     .left,
     .right {
       padding: 0

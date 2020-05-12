@@ -4,7 +4,7 @@ const { throwIfMissing } = argsValidator
 
 const role = [undefined, "Superadmin", "Facility", "Droppoint"]
 // const shipmentStatus = ["Open", "Shipping", "Arrived", "Cancelled"];
-const requestLineStatus = ["Open", "Commited", "Completed", "Cancelled"]; //FIXME: shit
+const requestLineStatus = ["Open", "Commited", "Completed", "Cancelled"]; //FIXME: Spelling
 
 const getRequestLineStatus = (status = throwIfMissing()) => requestLineStatus.indexOf(status)
 

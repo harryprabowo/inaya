@@ -100,7 +100,7 @@ const validate = async () => {
 
     return Promise.resolve(currentUserSubject.value);
   } catch (err) {
-    throw handleResponse(err, true);
+    throw handleResponse(err, true)
   }
 };
 

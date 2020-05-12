@@ -100,7 +100,6 @@ const ScheduleList = (props) => {
         fetchSchedules();
       })
       .catch(err => {
-        err.variant = "danger"
         props.setAlert(err)
       })
   }

@@ -103,7 +103,6 @@ const Detail = ({ full = false, ...props }) => {
 
           if (isNullOrUndefined(row.shipment.id)) {
             const err = new Error("Shipment not found")
-            err.variant = "danger"
             props.setAlert(err)
           } else if (row.shipment.id === -1) {
             props.setAlert(new Error("Request line is being processed by the system"))

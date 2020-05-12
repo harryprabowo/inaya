@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { Helmet } from 'react-helmet'
 
-import { isNullOrUndefined } from "util";
 import { authenticationService } from "~/_services";
 import { history, logoutHelper } from "~/_helpers";
 
-import { PrivateRoute, Alert, MenuBar } from "./_components";
+import { PrivateRoute, Alert, MenuBar, PublicRoute } from "./_components";
 
 import { routes } from "~/_pages";
 
@@ -21,7 +20,11 @@ const App = () => {
   // returns current username, or undefined if not logged in
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    authenticationService.currentUser.subscribe((x) => setCurrentUser(x));
+    try {
+      authenticationService.currentUser.subscribe((x) => setCurrentUser(x));
+    } catch (err) {
+      setAlert(err)
+    }
   });
 
   return (
@@ -36,33 +39,36 @@ const App = () => {
           setAlert={setAlert}
         />
         <Switch>
-          {routes.map((route, key) =>
-            route.isPrivate ? (
-              <PrivateRoute
-                key={key}
-                route={route}
-                path={route.path}
-                // PROPS
-                setAlert={setAlert}
-              />
-            ) : (
-                <Route
-                  key={key}
-                  exact={route.path === "/"}
-                  path={route.path}
-                  render={(props) => (
-                    <>
-                      {isNullOrUndefined(route.name) ? null : (
-                        <Helmet>
-                          <title>{route.name}</title>
-                        </Helmet>
-                      )}
-                      <route.component setAlert={setAlert} {...props} />
-                    </>
-                  )}
-                />
-              )
-          )}
+          {routes.map((route, i) => (
+            <Route
+              key={i}
+              exact={route.path === "/"}
+              path={route.path}
+              render={props => {
+                if (route.isPrivate) {
+                  return (
+                    <PrivateRoute
+                      name={route.name}
+                      role={route.role}
+                      component={route.component}
+                      {...props}
+                      setAlert={setAlert}
+                    />
+                  )
+                } else {
+                  return (
+                    <PublicRoute
+                      name={route.name}
+                      component={route.component}
+                      {...props}
+                      setAlert={setAlert}
+                    />
+                  )
+                }
+              }}
+            />
+          ))}
+
           <Route
             path="/logout"
             children={() => {

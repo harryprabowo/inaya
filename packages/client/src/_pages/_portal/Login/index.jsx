@@ -58,7 +58,6 @@ const Login = (props) => {
             },
             (error) => {
               setSubmitting(false);
-              error.variant = "danger"
               props.setAlert(error)
             }
           );

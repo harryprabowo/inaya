@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router"
-import { Route, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { isNullOrUndefined } from "util";
 import Cookies from 'js-cookie';
@@ -10,9 +10,8 @@ import { authenticationService } from "~/_services";
 import Loading from "~/_components/_static/Loading";
 import { Forbidden, ServiceUnavailable } from "~/_pages";
 
-const PrivateRoute = ({ route, ...rest }) => {
+const PrivateRoute = ({ component: Component, name, role, ...props }) => {
   const history = useHistory()
-  const { path, name, role, component: Component } = route;
 
   const [nothing, setNothing] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -25,8 +24,8 @@ const PrivateRoute = ({ route, ...rest }) => {
       setCurrentUser(validated);
 
       if (isNullOrUndefined(validated)) {
-        const error = new Error("Session not found")
-        error.status = 404
+        const error = new Error("Session Unauthorized")
+        error.status = 401
 
         setCurrentRole()
 
@@ -38,11 +37,11 @@ const PrivateRoute = ({ route, ...rest }) => {
 
       setLoading(false);
     } catch (err) {
-      if (err.status !== 404) {
-        err.variant = "danger"
+      if (err.status !== 401) {
         setNothing(true);
-        rest.setAlert(err);
+        props.setAlert(err);
       }
+
       setLoading(false);
     }
   };
@@ -53,37 +52,31 @@ const PrivateRoute = ({ route, ...rest }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (loading) {
+    return <Loading />;
+  }
+
   if (nothing) {
     return <ServiceUnavailable />;
-  } else if (loading) {
-    return <Loading />;
   } else {
-    return (
-      <Route
-        path={path}
-        render={(props) => {
-          if (isNullOrUndefined(currentUser)) {
-            // not logged in so redirect to login page with the return url
-            return (
-              <Redirect
-                to={{ pathname: "/login", state: { from: props.location } }}
-              />
-            );
-          }
-          // authorised so return component
-          if (isNullOrUndefined(role) || role.includes(currentRole)) {
-            return (
-              <>
-                <Helmet>
-                  <title>{name}</title>
-                </Helmet>
-                <Component history={history} {...props} {...rest} />
-              </>
-            );
-          } else return <Forbidden />;
-        }}
-      />
-    );
+    if (isNullOrUndefined(currentUser)) {
+      // not logged in so redirect to login page with the return url
+      return <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+    }
+
+    // authorised so return component
+    if (isNullOrUndefined(role) || role.includes(currentRole)) {
+      return (
+        <>
+          <Helmet>
+            <title>{isNullOrUndefined(name) ? name : `INAYA - ${name}`}</title>
+          </Helmet>
+          <Component history={history} {...props} />
+        </>
+      );
+    }
+
+    return <Forbidden />;
   }
 };
 

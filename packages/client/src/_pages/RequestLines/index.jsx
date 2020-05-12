@@ -103,7 +103,6 @@ const RequestLines = (props) => {
           _e.stopPropagation();
           if (isNullOrUndefined(row.shipment.id)) {
             const err = new Error("Shipment not found")
-            err.variant = "danger"
             props.setAlert(err)
           } else {
             props.history.push(`/shipment?id=${row.shipment.id}&facility=${row.facility.id}`);
@@ -131,7 +130,6 @@ const RequestLines = (props) => {
       .then(item => {
         if (isNullOrUndefined(item)) {
           const err = new Error("Item not fetched")
-          err.variant = "danger"
           props.setAlert(err)
         }
         else {

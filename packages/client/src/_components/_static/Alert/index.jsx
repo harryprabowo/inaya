@@ -22,20 +22,20 @@ const Alert = ({ alert, showAlert, setShowAlert }) => {
   return (
     <BAlert
       className={showAlert ? "alert-show" : null}
-      variant={isNullOrUndefined(alert) ? "danger" : isNullOrUndefined(alert.variant) ? "warning" : alert.variant}
+      variant={isNullOrUndefined(alert) ? "danger" : isNullOrUndefined(alert.variant) ? "danger" : alert.variant}
       onClose={() => setShowAlert(false)}
       dismissible
     >
       {isNullOrUndefined(alert) ? null : (
         <>
-          {alert.status ? (
+          {isNullOrUndefined(alert.status) || alert.status === 400 ? null : (
             <>
               <BAlert.Link>Error {alert.status}</BAlert.Link>
               <br />
             </>
-          ) : null}
+          )}
           <span style={{ fontSize: "9pt" }}>
-            {typeof alert.message === "string" ? alert.message : "An error occurred"}
+            {alert.statusText || alert.message || "Something wrong happened"}
           </span>
         </>
       )}

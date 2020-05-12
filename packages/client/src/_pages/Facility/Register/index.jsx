@@ -4,7 +4,7 @@ import { facilityService } from "~/_services";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button, Row, Col, Card, Form as BForm } from "react-bootstrap";
+import { Button, Col, Card, Form as BForm } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
 
