@@ -68,6 +68,14 @@
     }
   }
 
+  .profile-btn {
+    @media screen and (max-width: 512px) {
+      span {
+        display: none;
+      }
+    }
+  }
+
   .menu-dropdown {
     box-shadow: inset $hard-box-shadow;
   }
@@ -78,11 +86,10 @@
 
     .dropdown-item {
       height: 3rem;
-
     }
 
     @media screen and (max-width: 512px) {
-      width: 100vw;
+      left: -50vw;
     }
   }
 

@@ -132,6 +132,8 @@ const MenuBar = ({ currentUser, ...props }) => {
             {currentUser ? (
               <Button
                 variant="outline-info"
+                className="profile-btn"
+                size="sm"
                 onClick={() => handleShowProfile()}
               >
                 <FontAwesomeIcon icon={faUserCircle} />{" "}
