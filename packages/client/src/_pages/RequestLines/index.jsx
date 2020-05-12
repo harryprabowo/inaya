@@ -61,7 +61,7 @@ const RequestLines = (props) => {
       formatter: (e) => {
         const handleClick = (_e) => {
           _e.stopPropagation();
-          props.history.push(`/facility?id=${e.id}`);
+          props.history.push(`/facility/manage?id=${e.id}`);
         };
 
         return (
