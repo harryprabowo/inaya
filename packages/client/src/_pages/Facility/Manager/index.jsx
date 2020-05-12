@@ -148,7 +148,7 @@ const Manager = (props) => {
   }
 
   return (
-    <div className="pages">
+    <div className="pages no-map">
       <h3>Manage Facility</h3>
       <hr style={{ marginBottom: 0 }} />
       <br />

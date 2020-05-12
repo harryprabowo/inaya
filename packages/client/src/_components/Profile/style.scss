@@ -7,6 +7,12 @@
   .modal-body {
     padding: 0;
   }
+
+  td {
+    @media screen and (max-width: 767px) {
+      font-size: 10pt;
+    }
+  }
 }
 
 .profile-backdrop {

@@ -59,7 +59,6 @@ const Profile = ({ show, setShow, currentUser, ...props }) => {
                           <tr key={i}>
                             <td
                               style={{
-                                fontSize: "8pt",
                                 fontWeight: "bold",
                                 verticalAlign: "middle",
                               }}

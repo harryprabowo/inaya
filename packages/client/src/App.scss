@@ -302,22 +302,52 @@ a,
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
 
     .left,
     .right {
       padding: 0
     }
 
-    .left {
+    .left,
+    .right {
       margin-bottom: 1.5rem;
+    }
+
+    &:not(.no-map) {
+      .right {
+
+        h5,
+        br {
+          display: none;
+        }
+
+        .map-container {
+          margin: 0 -15px;
+          margin-top: -1.5em;
+        }
+      }
     }
 
     .row {
       display: flex;
       flex-direction: column-reverse;
+
+      .row {
+        flex-direction: unset;
+      }
     }
 
+    &.no-map {
+      .row {
+        flex-direction: column;
+      }
+    }
+
+    .map-container {
+      min-height: unset;
+      height: 30vh;
+    }
   }
 
   .left {
