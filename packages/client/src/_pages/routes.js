@@ -37,7 +37,7 @@ const routes = [
   new Route("Droppoints", "/droppoint", Droppoint, faMapMarkedAlt, 1, [1, 3]),
   new Route("Requests", "/request", Request, faBullhorn, 1, [1, 3]),
   new Route("Facilities", "/facility", Facility, faMapMarkedAlt, 1, [1, 2]),
-  new Route("Request Lines", "/requestlines", RequestLines, faBullhorn, 1, [1, 2]),
+  new Route("Request Lines", "/requestline", RequestLines, faBullhorn, 1, [1, 2]),
   new Route("Shipment", "/shipment", Shipment, faTruck, 1, [1, 2, 3], 0),
 ];
 

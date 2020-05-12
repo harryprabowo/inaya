@@ -11,7 +11,7 @@ const Help = props => {
         <LinkContainer to="/facility">
           <Button variant="info">Facility</Button>
         </LinkContainer>
-        <LinkContainer to="/requestlines">
+        <LinkContainer to="/requestline">
           <Button variant="info">Request Lines</Button>
         </LinkContainer>
       </ButtonGroup>
