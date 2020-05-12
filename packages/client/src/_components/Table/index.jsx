@@ -57,8 +57,6 @@ const Table = ({
     textAlign: 'right',
     width: "20%"
   }
-  // }
-
 
   return (
     <ToolkitProvider
@@ -143,63 +141,71 @@ const Table = ({
                       </Row>
                     </div>
                   ) : null}
-                  <BootstrapTable
-                    {...props.baseProps}
-                    {...paginationTableProps}
-                    bootstrap4
-                    bordered={false}
-                    noDataIndication={
-                      isUndefined(data) ? (
-                        <FontAwesomeIcon
-                          icon={faSpinner}
-                          size="lg"
-                          spin
-                          style={{ opacity: 0.5 }}
-                        />
-                      ) : "No data found"
-                    }
-                    defaultSorted={defaultSorted}
-                    hover={
-                      isNullOrUndefined(withAction) ? false : isNullOrUndefined(data) ? false : data.length > 0
-                    }
-                    selectRow={isNullOrUndefined(withAction) ? undefined : {
-                      mode: "radio",
-                      clickToSelect: true,
-                      hideSelectColumn: true,
-                      style: { backgroundColor: "#f3f3f3" },
-                    }}
-                    rowEvents={isNullOrUndefined(withAction) ? undefined : {
-                      onClick: (e, row, rowIndex) => {
-                        if (typeof withAction === 'object') {
-                          const getString = () => {
-                            if (isNullOrUndefined(withAction.propToPass)) return '#'
 
-                            if (Array.isArray(withAction.propToPass)) return `?${withAction.propToPass.map(prop => `${prop}=${row[prop]}${withAction.propToPass.length > 1 ? `&` : ``}`)}`
-                            else return `/${row[withAction.propToPass]}`
-                          }
-
-                          return withAction.history.push(
-                            `/${withAction.path}${getString()}`,
-                            {
-                              ...withAction.state,
-                              data: row
-                            }
-                          )
-                        } else if (typeof withAction === 'function') {
-                          withAction(row)
+                  <div className="wrapper">
+                    <div className="table-container scrollable-children">
+                      <BootstrapTable
+                        {...props.baseProps}
+                        {...paginationTableProps}
+                        bootstrap4
+                        bordered={false}
+                        noDataIndication={
+                          isUndefined(data) ? (
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              size="lg"
+                              spin
+                              style={{ opacity: 0.5 }}
+                            />
+                          ) : "No data found"
                         }
-                      }
-                    }}
-                    rowClasses={`${rowClasses}${isNullOrUndefined(withAction) ? null : " actionable"}`}
-                  />
+                        defaultSorted={defaultSorted}
+                        hover={
+                          isNullOrUndefined(withAction) ? false : isNullOrUndefined(data) ? false : data.length > 0
+                        }
+                        selectRow={isNullOrUndefined(withAction) ? undefined : {
+                          mode: "radio",
+                          clickToSelect: true,
+                          hideSelectColumn: true,
+                          style: { backgroundColor: "#f3f3f3" },
+                        }}
+                        rowEvents={isNullOrUndefined(withAction) ? undefined : {
+                          onClick: (e, row, rowIndex) => {
+                            if (typeof withAction === 'object') {
+                              const getString = () => {
+                                if (isNullOrUndefined(withAction.propToPass)) return '#'
 
-                  {isNullOrUndefined(data) ||
-                    data.length === 0 ? null : (
+                                if (Array.isArray(withAction.propToPass)) return `?${withAction.propToPass.map(prop => `${prop}=${row[prop]}${withAction.propToPass.length > 1 ? `&` : ``}`)}`
+                                else return `/${row[withAction.propToPass]}`
+                              }
+
+                              return withAction.history.push(
+                                `/${withAction.path}${getString()}`,
+                                {
+                                  ...withAction.state,
+                                  data: row
+                                }
+                              )
+                            } else if (typeof withAction === 'function') {
+                              withAction(row)
+                            }
+                          }
+                        }}
+                        rowClasses={`${rowClasses}${isNullOrUndefined(withAction) ? null : " actionable"}`}
+                      />
+                    </div>
+                  </div>
+
+                </Card.Body>
+
+                {isNullOrUndefined(data) ||
+                  data.length === 0 ? null : (
+                    <Card.Footer>
                       <div className="pagination-total-container">
                         <PaginationTotalStandalone {...paginationProps} />
                       </div>
-                    )}
-                </Card.Body>
+                    </Card.Footer>
+                  )}
               </>
             )}
           </PaginationProvider>

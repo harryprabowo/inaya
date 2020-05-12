@@ -1,5 +1,13 @@
-#schedule-list {
-    .table-card {
-        min-height: initial;
+@import "./_assets/variables";
+
+#facility-manager {
+    #schedule-list {
+        .table-card {
+            min-height: calc(#{$content-height} - #{$navbar-height} - 7.5rem);
+
+            .wrapper {
+                height: calc(#{$content-height} - #{$navbar-height} - 15rem)
+            }
+        }
     }
 }

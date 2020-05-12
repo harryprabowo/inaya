@@ -148,14 +148,12 @@ const Manager = (props) => {
   }
 
   return (
-    <div className="pages no-map">
+    <div className="pages no-map" id="facility-manager">
       <h3>Manage Facility</h3>
       <hr style={{ marginBottom: 0 }} />
       <br />
       <Row>
         <Col xs={12} md={5} className="left">
-          <h5>Details</h5>
-          <br />
           <Card id="detail-container">
             <Card.Body>
               {isUndefined(facilityDetail) ? (

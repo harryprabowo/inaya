@@ -287,6 +287,7 @@ a,
   .table-card,
   .map-container {
     min-height: calc(#{$content-height} - #{$navbar-height});
+    height: 0
   }
 
   @media screen and (max-width: 1024px) {
@@ -332,16 +333,16 @@ a,
     .row {
       display: flex;
       flex-direction: column-reverse;
-
-      .row {
-        flex-direction: unset;
-      }
     }
 
     &.no-map {
       .row {
         flex-direction: column;
       }
+    }
+
+    .row .row {
+      flex-direction: unset;
     }
 
     .map-container {
