@@ -32,7 +32,7 @@ services:
 
   server:
     container_name: inaya-server
-    command: ["yarn", "workspace", "server", "start"]
+    command: ["yarn", "workspace", "server", "dev"]
     depends_on:
       - db
     environment:
@@ -65,7 +65,7 @@ services:
 
   client:
     container_name: inaya-client
-    command: ["yarn", "workspace", "client", "start"]
+    command: ["yarn", "workspace", "client", "dev"]
     depends_on:
       # The `client` depends on the `server` because of shared volumes:
       - server
