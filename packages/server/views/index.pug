@@ -3,3 +3,15 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  hr
+  h3 Connected to
+  code POSTGRES_USER - #{process.env.POSTGRES_USER}
+  br
+  code POSTGRES_PASSWORD - #{process.env.POSTGRES_PASSWORD}
+  br
+  code POSTGRES_DB - #{process.env.POSTGRES_DB}
+  br
+  code POSTGRES_HOST - #{process.env.POSTGRES_HOST}
+  br
+  code POSTGRES_PORT - #{process.env.POSTGRES_PORT}
+
