@@ -15,7 +15,7 @@
     "classnames": "^2.2.6",
     "concurrently": "^5.2.0",
     "cross-env": "^7.0.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "pg": "^8.1.0",
     "prop-types": "^15.7.2",
     "pug": "^2.0.4"
